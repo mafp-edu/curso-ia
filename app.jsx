@@ -15,6 +15,8 @@ function Quiz({ quiz, onComplete }) {
     }
   };
 
+  const resetQuiz = () => setAnswers({});
+
   const allAnswered = Object.keys(answers).length === quiz.questions.length;
   const correctCount = quiz.questions.reduce((acc, q, i) => acc + (answers[i] === q.correct ? 1 : 0), 0);
 
@@ -27,13 +29,35 @@ function Quiz({ quiz, onComplete }) {
           <div className="quiz-sub">Feedback inmediato · autocorrección</div>
         </div>
         {allAnswered && (
-          <div style={{ marginLeft: "auto", textAlign: "right" }}>
-            <div style={{ fontSize: 28, fontWeight: 700, color: "var(--marine)", letterSpacing: "-0.02em", fontVariantNumeric: "tabular-nums" }}>
-              {correctCount}/{quiz.questions.length}
+          <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 16 }}>
+            <div style={{ textAlign: "right" }}>
+              <div style={{ fontSize: 28, fontWeight: 700, color: "var(--marine)", letterSpacing: "-0.02em", fontVariantNumeric: "tabular-nums" }}>
+                {correctCount}/{quiz.questions.length}
+              </div>
+              <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--ink-3)", fontWeight: 600 }}>
+                Puntaje
+              </div>
             </div>
-            <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--ink-3)", fontWeight: 600 }}>
-              Puntaje
-            </div>
+            <button
+              onClick={resetQuiz}
+              style={{
+                background: "var(--paper)",
+                border: "1px solid var(--line)",
+                borderRadius: 8,
+                padding: "8px 14px",
+                fontSize: 12,
+                fontWeight: 600,
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+                color: "var(--ink-2)",
+                cursor: "pointer",
+                font: "inherit",
+                fontSize: 12,
+              }}
+              title="Borrar respuestas y volver a intentarlo"
+            >
+              ↺ Reintentar
+            </button>
           </div>
         )}
       </div>
@@ -181,7 +205,7 @@ function BlockView({ block, completed, toggleLesson, quizCompleted, onQuizDone, 
           onToggle={() => toggleLesson(lesson.id)}
         />
       ))}
-      <Quiz quiz={block.quiz} onComplete={onQuizDone} />
+      <Quiz key={block.id} quiz={block.quiz} onComplete={onQuizDone} />
       <WrapUp block={block} />
       {showCelebration && <Celebration {...celebrationProps} />}
     </div>
