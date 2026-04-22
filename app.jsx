@@ -133,7 +133,7 @@ function Celebration({ onPrint, onReset, stats }) {
     <div className="celebration">
       <div className="celebration-eyebrow">Curso completado</div>
       <h2>Felicitaciones.</h2>
-      <p>Terminaste los 4 bloques del curso Copilot Chat Básico. Ya tienes la base para empezar a usarlo con criterio el lunes por la mañana.</p>
+      <p>Terminaste los 5 bloques del curso Copilot Chat Básico. Ya tienes la base para empezar a usarlo con criterio el lunes por la mañana.</p>
       <div className="celebration-stats">
         <div className="celebration-stat">
           <div className="n">{stats.lessons}</div>
@@ -379,6 +379,17 @@ function App() {
 
   const onQuizDone = (correct, total) => {
     setQuizCompleted(q => ({ ...q, [activeBlockId]: true }));
+    // Al completar el quiz, marcar todas las lecciones del bloque como completadas.
+    // Evita que la barra de progreso se quede debajo del 100% si el usuario no
+    // cliqueo manualmente cada lección.
+    const block = data.blocks.find(b => b.id === activeBlockId);
+    if (block) {
+      setCompleted(c => {
+        const next = { ...c };
+        block.lessons.forEach(l => { next[l.id] = true; });
+        return next;
+      });
+    }
   };
 
   const onPrint = () => window.print();
