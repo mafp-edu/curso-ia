@@ -437,8 +437,8 @@ function App() {
         showCelebration={isLastBlock && allDone}
         celebrationProps={{ onPrint, onReset, stats: celebrationStats }}
       />
-      {/* Block navigation at bottom */}
-      <div className="main" style={{ paddingTop: 0, marginTop: -40 }}>
+      {/* Block navigation at bottom — always visible, even without quiz */}
+      <div className="main" style={{ paddingTop: 0, paddingBottom: 48 }}>
         <BlockNav data={data} activeBlockId={activeBlockId} setActiveBlockId={setActiveBlockId} />
       </div>
       {tweaksOpen && <TweaksPanel config={config} setConfig={setConfig} onClose={() => setTweaksOpen(false)} />}
