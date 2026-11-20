@@ -1035,7 +1035,7 @@ html, body {
   padding: 3px 9px; border-radius: 4px;
 }
 .exercise-title { font-size: 18px; font-weight: 700; letter-spacing: -0.015em; }
-.exercise textarea {
+.exercise textarea, .lesson-body textarea {
   width: 100%;
   min-height: 120px;
   border: 1.5px solid var(--line);
@@ -1050,7 +1050,7 @@ html, body {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 13px;
 }
-.exercise textarea:focus {
+.exercise textarea:focus, .lesson-body textarea:focus {
   outline: none;
   border-color: var(--burgundy);
   box-shadow: 0 0 0 3px var(--burgundy-soft);
@@ -1064,6 +1064,9 @@ html, body {
 }
 @media (max-width: 720px) { .rubric { grid-template-columns: 1fr 1fr; } }
 .rubric-item {
+  text-align: left;
+  font-family: inherit;
+  color: var(--ink);
   background: white;
   border: 1px solid var(--line);
   border-radius: 4px;
