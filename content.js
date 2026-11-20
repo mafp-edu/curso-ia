@@ -18,7 +18,7 @@ window.COURSE_DATA = {
       num: 0,
       title: "Antes de Copilot | qué predice y qué no",
       eyebrow: "Bloque 00 | 20 min",
-      lede: "Fundamento conceptual y económico. Qué es un LLM, por qué inventa datos y por qué el juicio humano gana valor cuando la predicción se abarata.",
+      lede: "Fundamento conceptual y económico del curso, que explica qué es un LLM, por qué puede inventar datos con total seguridad y por qué el juicio humano gana valor a medida que la predicción se abarata.",
       badge: "4 lecciones | Quiz",
       lessons: [
         {
@@ -34,7 +34,7 @@ window.COURSE_DATA = {
               { title: "IA generativa (LLMs)", body: "Copilot, ChatGPT, Claude. Predice el siguiente token de texto. Produce lenguaje plausible, no verdad verificada." },
               { title: "IA agéntica", body: "LLM + herramientas + memoria. Ejecuta acciones, no solo responde. Agent Builder apunta hacia acá." },
             ]},
-            { t: "callout", kind: "nota", head: "Dónde vive Copilot", x: "Copilot Chat Básico es IA generativa. El Agent Builder que verás en el Bloque 4 es un primer paso hacia la IA agéntica. Saberlo te ayuda a ajustar expectativas." },
+            { t: "callout", kind: "nota", head: "Dónde vive Copilot", x: "Copilot Chat Básico es IA generativa, y el Agent Builder del Bloque 4 es apenas un primer paso hacia la IA agéntica. Tener clara esa distinción permite ajustar lo que cabe esperar de la herramienta." },
           ],
         },
         {
@@ -44,26 +44,26 @@ window.COURSE_DATA = {
           eyebrow: "Mecánica",
           title: "Qué hace un LLM | el ejemplo de la capital",
           body: [
-            { t: "p", x: "Definición operativa, sin tecnicismos: un LLM es un **autocompletador a escala industrial**, entrenado con billones de tokens de texto (un token es un trozo de palabra). Con todo lo que tiene escrito hasta ese momento, predice el **siguiente token más probable**, y repite el proceso hasta completar la respuesta." },
+            { t: "p", x: "En términos operativos, un LLM es un **autocompletador a escala industrial** entrenado con billones de tokens de texto (un token es un trozo de palabra). A partir de todo lo escrito hasta ese momento predice el **siguiente token más probable**, y repite el proceso hasta completar la respuesta." },
             { t: "bignums", items: [
               { n: "1", l: "Token predicho en cada paso", c: "burgundy" },
               { n: "15 billones", l: "Tokens de entrenamiento de Llama 3", c: "marine", fs: 52 },
               { n: "0", l: "Fuentes que consulta el modelo por sí solo, sin búsqueda ni archivos", c: "olive" },
             ]},
             { t: "src", x: "Fuente de la cifra: Meta, [«Introducing Meta Llama 3»](https://ai.meta.com/blog/meta-llama-3/), 18 de abril de 2024 («pretrained on over 15T tokens»). En inglés se dice *15 trillion*; en español son 15 billones (15 × 10¹²). Los modelos más recientes publican poco sobre este dato; tómalo como orden de magnitud." },
-            { t: "p", x: "**Experimento mental.** Imagina que le preguntas a un LLM: *¿cuál es el capital de Chile?* La pregunta tiene un juego intencional. «La capital» (femenino) es la ciudad sede del gobierno; «el capital» (masculino) son los recursos económicos de un país, como el dinero, las materias primas o la gente preparada. Aprieta el botón y observa qué responde. Después veremos por qué." },
+            { t: "p", x: "**Experimento mental.** Supón que le preguntas a un LLM *¿cuál es el capital de Chile?* La pregunta tiene un juego intencional, ya que «la capital» (femenino) es la ciudad sede del gobierno, mientras «el capital» (masculino) alude a los recursos económicos de un país, tales como el dinero, las materias primas o la gente preparada. Aprieta el botón para ver qué responde el modelo y, luego, por qué lo hace." },
             { t: "llm-sim",
               user: "¿Cuál es el capital de Chile?",
               answer: "Santiago.",
               reveals: [
                 { head: "Lo que acaba de pasar",
-                  x: "En esta simulación, el modelo leyó *«capital de Chile»* y completó con la continuación más frecuente en los textos con que se entrenó: **Santiago**. No consultó ninguna fuente ni se detuvo en el artículo «el». Eligió la respuesta más probable." },
+                  x: "En esta simulación, el modelo leyó *«capital de Chile»* y completó con la continuación más frecuente en los textos con que se entrenó, es decir, **Santiago**, sin consultar ninguna fuente ni detenerse en el artículo «el»." },
                 { head: "Lo que habría respondido una persona atenta",
-                  x: "Alguien que lee con cuidado nota el «el» y puede responder **cobre** (el principal recurso exportador del país) o **capital humano** (la fuerza de trabajo y su formación). La palabra *capital* tiene varias acepciones y la persona **elige una según el contexto y la intención** de quien pregunta." },
+                  x: "Alguien que lee con cuidado nota el «el» y puede responder **cobre** (el principal recurso exportador del país) o **capital humano** (la fuerza de trabajo y su formación). Así, ante una palabra con varias acepciones, la persona elige una según el contexto y la intención de quien pregunta." },
                 { head: "La lección",
-                  x: "Un LLM predice la **continuación más probable**. Si la pregunta es ambigua y no trae contexto, se va a la interpretación más común. Los modelos actuales a veces piden una aclaración, pero no conviene contar con eso. Por eso la **C de CORE**, que verás en el Bloque 2, es Contexto: le entregas el marco que evita la respuesta genérica." },
+                  x: "Un LLM predice la **continuación más probable**, con lo cual, si la pregunta es ambigua y no trae contexto, se inclina por la interpretación más común. Si bien los modelos actuales a veces piden una aclaración, no conviene contar con ello, y por eso la **C de CORE** (Bloque 2) corresponde a Contexto, el marco que evita la respuesta genérica." },
                 { head: "Por qué importa para tu reporte",
-                  x: "Cuando Copilot inventa una cifra, actúa el mismo mecanismo que produjo «Santiago»: elige un número que *suena correcto*. Que algo sea plausible no lo hace verdadero, y tu juicio es el filtro." },
+                  x: "Cuando Copilot inventa una cifra actúa el mismo mecanismo que produjo «Santiago», esto es, elige un número que *suena correcto*. Que algo sea plausible no lo hace verdadero, y el filtro sigue siendo el juicio de quien firma el reporte." },
               ],
             },
           ],
@@ -81,10 +81,10 @@ window.COURSE_DATA = {
               { n: "~400.000", l: "Solicitudes analizadas por el NYDFS", c: "marine", fs: 56 },
               { n: "0", l: "Infracciones a la ley de crédito justo encontradas", c: "olive" },
             ]},
-            { t: "callout", kind: "nota", head: "El desenlace (marzo de 2021)", x: "El NYDFS concluyó que **no hubo discriminación ilegal**, ni intencional ni por impacto dispar. Las diferencias se explicaban por historiales de crédito individuales: por ejemplo, un cónyuge figuraba en la hipoteca y el otro no, o uno era solo usuario adicional de las tarjetas del otro. El informe agregó una advertencia: la puntuación de crédito, aun siendo legal, puede reflejar y perpetuar desigualdades históricas (*legacy bias*)." },
+            { t: "callout", kind: "nota", head: "El desenlace (marzo de 2021)", x: "El NYDFS concluyó que **no hubo discriminación ilegal**, ni intencional ni por impacto dispar. Las diferencias se explicaban por historiales de crédito individuales (por ejemplo, un cónyuge figuraba en la hipoteca y el otro no, o uno era solo usuario adicional de las tarjetas del otro). Sin perjuicio de ello, el informe advirtió que la puntuación de crédito, aun siendo legal, puede reflejar y perpetuar desigualdades históricas (*legacy bias*)." },
             { t: "src", x: "Fuentes: MacRumors, [«Regulators Looking Into Claims of Gender Discrimination in Apple Card Credit Decisions»](https://www.macrumors.com/2019/11/10/apple-card-gender-discrimination/), 10-nov-2019; NYDFS, [*Report on Apple Card Investigation*](https://s3.documentcloud.org/documents/20521283/rpt_202103_apple_card_investigation.pdf), marzo de 2021." },
-            { t: "p", x: "**Lección para el alumno.** El caso deja dos enseñanzas. La primera: que un modelo no use una variable (aquí, el género) no basta para descartar diferencias, porque los datos históricos pueden traerlas por otras vías; hay que revisar los resultados con datos. La segunda: la acusación viral circuló mucho más rápido que la evidencia, y la investigación no la confirmó. Los LLM heredan patrones, sesgos y errores comunes de los textos con que se entrenaron, y una conclusión que suena convincente también necesita verificación." },
-            { t: "callout", kind: "nota", head: "Puente a Copilot", x: "Cuando Copilot te sugiera una redacción que suena a consultor genérico, o un hallazgo que parece obvio, recuerda que está promediando miles de textos parecidos. Tu aporte profesional está en lo que ese promedio **no** produce." },
+            { t: "p", x: "Si bien un modelo puede no usar una variable (aquí, el género), eso no basta para descartar diferencias, ya que los datos históricos pueden traerlas por otras vías, y la única forma de saberlo es revisar los resultados con datos. A su vez, la acusación viral circuló mucho más rápido que la evidencia, y la investigación no la confirmó. De esta forma, el caso sirve de advertencia para quien usa un LLM, que hereda patrones, sesgos y errores comunes de los textos con que fue entrenado y cuyas conclusiones, por convincentes que suenen, también requieren verificación." },
+            { t: "callout", kind: "nota", head: "Puente a Copilot", x: "Cuando Copilot sugiere una redacción que suena a consultor genérico, o un hallazgo que parece obvio, es porque está promediando miles de textos parecidos, y el aporte profesional está, precisamente, en lo que ese promedio no produce." },
           ],
         },
         {
@@ -94,7 +94,7 @@ window.COURSE_DATA = {
           eyebrow: "Economía",
           title: "Prediction Machines | por qué tu juicio vale más",
           body: [
-            { t: "p", x: "**Agrawal, Gans y Goldfarb** (*Prediction Machines*, Harvard Business Review Press, 2018) proponen leer el avance de la IA como **una caída en el costo de la predicción**. De ahí sacan tres consecuencias económicas." },
+            { t: "p", x: "Siguiendo a **Agrawal, Gans y Goldfarb** (*Prediction Machines*, Harvard Business Review Press, 2018), el avance de la IA puede leerse como **una caída en el costo de la predicción**, de la cual se desprenden tres consecuencias económicas." },
             { t: "bignums", items: [
               { n: "↓", l: "Costo de predecir", c: "olive" },
               { n: "↑", l: "Usos de la predicción", c: "marine" },
@@ -106,7 +106,7 @@ window.COURSE_DATA = {
               { title: "3 | Los complementos suben", body: "Lo que **no** es predicción, como el juicio o decidir qué decirle al directorio, pasa a ser el cuello de botella y gana valor." },
             ]},
             { t: "src", x: "Fuente: Agrawal, Gans y Goldfarb, *Prediction Machines: The Simple Economics of Artificial Intelligence*, Harvard Business Review Press, abril de 2018. La descripción oficial del libro habla de «a drop in the cost of prediction»." },
-            { t: "p", x: "Aplicado al reporte mensual: antes solo delegabas el formato. Ahora puedes delegar el primer borrador, la clasificación masiva y el resumen de correos. El **juicio sobre qué significa cada hallazgo para la empresa sigue siendo tuyo**, y ahí está el ahorro real de horas." },
+            { t: "p", x: "En el reporte mensual, antes solo se delegaba el formato, y hoy es posible delegar el primer borrador, la clasificación masiva y el resumen de correos. Sin embargo, el **juicio sobre qué significa cada hallazgo para la empresa sigue siendo tuyo**, y es ahí donde está el ahorro real de horas." },
             { t: "aforismo-mini", x: "La predicción se abarató; el juicio sigue siendo caro." },
           ],
         },
@@ -150,11 +150,11 @@ window.COURSE_DATA = {
         ],
       },
       paraLlevar: [
-        "Un LLM es un autocompletador: predice la respuesta y no la verifica.",
-        "Sin contexto, se va a la interpretación más común.",
-        "Predicción barata, juicio humano más valioso.",
+        "Un LLM es un autocompletador que predice la respuesta sin verificarla.",
+        "Sin contexto, el modelo se inclina por la interpretación más común.",
+        "Cuando la predicción se abarata, el juicio humano gana valor.",
       ],
-      cliffhanger: "Si vas a delegar predicción, cuida no filtrar datos sensibles por accidente. El próximo bloque trata de tu primer chat seguro.",
+      cliffhanger: "Si se va a delegar predicción, conviene hacerlo sin filtrar datos sensibles por accidente, que es justamente el tema del próximo bloque.",
       aforismo: "La IA predice «Santiago». Tú decides si hablamos de geografía o de cobre.",
     },
 
@@ -166,7 +166,7 @@ window.COURSE_DATA = {
       num: 1,
       title: "Tu primer chat seguro",
       eyebrow: "Bloque 01 | 20 min",
-      lede: "Seguridad antes de escribir tu primer prompt. El escudo verde, la protección de datos empresarial y la anonimización son la base.",
+      lede: "Antes de escribir el primer prompt hay que entender la seguridad, esto es, el escudo verde, la protección de datos empresarial y la anonimización.",
       badge: "6 lecciones | Quiz",
       lessons: [
         {
@@ -179,7 +179,7 @@ window.COURSE_DATA = {
           body: [
             { t: "p", x: "Tómate treinta segundos. Piensa en el último **reporte ejecutivo mensual** que preparaste: cifras de ventas, nombres de clientes, KPIs internos, comentarios del gerente sobre una unidad que no va bien." },
             { t: "p", x: "¿Lo pegarías tal cual en una caja de chat de IA?" },
-            { t: "callout", kind: "nota", head: "Reflexión", x: "Todavía no hay respuesta correcta. Retén tu primera reacción; en las próximas lecciones vamos a separar qué parte es prudencia y qué parte es mito." },
+            { t: "callout", kind: "nota", head: "Reflexión", x: "Todavía no hay respuesta correcta, aunque vale la pena retener la primera reacción, porque las próximas lecciones separan qué parte de ella es prudencia y qué parte es mito." },
           ],
         },
         {
@@ -235,7 +235,7 @@ window.COURSE_DATA = {
                 "El compromiso de que no se usan para entrenar los modelos.",
               ],
             }},
-            { t: "callout", kind: "tip", head: "Regla simple", x: "El escudo verde indica que tu conversación está bajo EDP. Copilot Chat (Basic) se apoya sobre todo en la web y puede enviar consultas a Bing por su cuenta, sin que actives nada; esas consultas quedan fuera de EDP. Por eso la anonimización se aplica siempre." },
+            { t: "callout", kind: "tip", head: "Regla simple", x: "El escudo verde indica que la conversación está bajo EDP. Ahora bien, Copilot Chat (Basic) se apoya sobre todo en la web y puede enviar consultas a Bing por su cuenta, sin que actives nada, y esas consultas quedan fuera de EDP, razón por la cual la anonimización se aplica siempre." },
             { t: "src", x: "Fuente: Microsoft Learn, [«Enterprise data protection in Microsoft 365 Copilot and Microsoft 365 Copilot Chat»](https://learn.microsoft.com/en-us/copilot/privacy-and-protections), actualizado el 3-nov-2026." },
           ],
         },
@@ -271,7 +271,7 @@ window.COURSE_DATA = {
               { mono: "[CONTACTO_1]", body: "Nombres y cargos de personas naturales." },
               { mono: "[OC_X]", body: "Números de orden de compra, proyecto o factura." },
               { mono: "[MONTO]", body: "Cifras sensibles: precios, márgenes, comisiones." },
-              { mono: "[DATO_CONTACTO]", body: "Mails, teléfonos, direcciones." },
+              { mono: "[DATO_CONTACTO]", body: "Correos, teléfonos y direcciones." },
             ]},
             { t: "aforismo-mini", x: "Si lo que vas a pegar no lo pondrías en un correo a un tercero externo, no lo pongas en Copilot." },
           ],
@@ -336,12 +336,12 @@ window.COURSE_DATA = {
         ],
       },
       paraLlevar: [
-        "El escudo verde protege el canal; anonimizar es una obligación legal.",
+        "El escudo verde protege el canal, y anonimizar es una obligación legal.",
         "Copilot Chat Básico vive en copilot.cloud.microsoft.",
         "Usa siempre los marcadores estándar.",
       ],
       cliffhanger: "El próximo bloque explica por qué Copilot inventa cifras con total seguridad y cómo el marco CORE reduce ese riesgo.",
-      aforismo: "El escudo verde protege tus datos; tus decisiones siguen siendo responsabilidad tuya.",
+      aforismo: "El escudo verde protege los datos, pero las decisiones siguen siendo de quien las toma.",
     },
 
     // =========================================================
@@ -350,9 +350,9 @@ window.COURSE_DATA = {
     {
       id: "b2",
       num: 2,
-      title: "CORE | prompts que inventan menos",
+      title: "CORE | prompts que reducen las alucinaciones",
       eyebrow: "Bloque 02 | 30 min",
-      lede: "El marco CORE es el centro del curso. Es la estructura que convierte una pregunta vaga en un prompt útil.",
+      lede: "El marco CORE es el centro del curso, ya que ofrece una estructura que convierte una pregunta vaga en un prompt útil.",
       badge: "5 lecciones | Quiz",
       lessons: [
         {
@@ -434,7 +434,7 @@ window.COURSE_DATA = {
                 "**Respuesta típica:** 5 bullets en el formato pedido, sin cifras inventadas, listos para copiar a la plantilla del comité. Requiere ajuste menor.",
               ],
             }},
-            { t: "callout", kind: "tip", head: "Lo que acabas de hacer", x: "Bajaste el costo de corrección. CORE agrega algo de trabajo al escribir el prompt y ahorra rondas de corrección después." },
+            { t: "callout", kind: "tip", head: "Lo que acabas de hacer", x: "Con este ejercicio baja el costo de corrección, ya que CORE agrega algo de trabajo al escribir el prompt y ahorra rondas de corrección después." },
           ],
         },
         {
@@ -444,7 +444,7 @@ window.COURSE_DATA = {
           eyebrow: "Técnica complementaria",
           title: "Role prompting sobre CORE",
           body: [
-            { t: "p", x: "Antes del Contexto, añades un **rol experto**. Su aporte principal está en el tono, el vocabulario y el nivel de detalle de la respuesta; no esperes que por sí solo haga más exactas las cifras." },
+            { t: "p", x: "Antes del Contexto se agrega un **rol experto**, cuyo aporte principal está en el tono, el vocabulario y el nivel de detalle de la respuesta, aun cuando por sí solo no hace más exactas las cifras." },
             { t: "prompt-core", title: "Role + CORE",
               lines: [
                 { tag: "Rol", x: "Eres un analista senior de control de gestión con 15 años de experiencia en empresas chilenas medianas. Tu escritura es seca y directiva, al estilo de un informe a directorio." },
@@ -454,7 +454,7 @@ window.COURSE_DATA = {
                 { tag: "E", x: "Formato tabla | tono de directorio..." },
               ],
             },
-            { t: "callout", kind: "nota", head: "Cuándo aplicarlo", x: "En tareas donde el **tono profesional** es lo que más cuesta. Para tareas mecánicas de resumen, CORE solo basta." },
+            { t: "callout", kind: "nota", head: "Cuándo aplicarlo", x: "Sirve en tareas donde el tono profesional es lo que más cuesta; para tareas mecánicas de resumen, CORE basta por sí solo." },
           ],
         },
         {
@@ -517,9 +517,9 @@ window.COURSE_DATA = {
       paraLlevar: [
         "CORE = Contexto, Objetivo, Restricciones, Expectativas.",
         "Dentro de la frontera: +40 % de calidad. Fuera: −19 puntos de acierto.",
-        "Role prompting solo cuando el tono sea el reto.",
+        "Role prompting, solo cuando la dificultad está en el tono.",
       ],
-      cliffhanger: "CORE ordena lo que le pides a Copilot. El próximo bloque trata de cómo revisar lo que te entrega, incluso en tareas con números.",
+      cliffhanger: "CORE ordena lo que se le pide a Copilot, y el próximo bloque se ocupa de cómo revisar lo que entrega, inclusive en tareas con números.",
       aforismo: "Un prompt sin CORE es una pregunta sin coordenadas.",
     },
 
@@ -531,7 +531,7 @@ window.COURSE_DATA = {
       num: 3,
       title: "Técnicas avanzadas y el chat completo",
       eyebrow: "Bloque 03 | 30 min",
-      lede: "Con CORE como base, sumamos tres técnicas de prompts y las funciones del chat que faltan por ver.",
+      lede: "Con CORE como base, este bloque suma tres técnicas de prompts y las funciones del chat que faltan por revisar.",
       badge: "7 lecciones | Quiz",
       lessons: [
         {
@@ -566,7 +566,7 @@ window.COURSE_DATA = {
               { n: "41%", l: "Aciertos con «pensemos paso a paso»", c: "olive" },
             ]},
             { t: "p", x: "**Wei et al. (2022)** mostraron que pedir al modelo que razone por pasos, con ejemplos resueltos, mejora sus resultados en problemas de varios pasos. **Kojima et al. (2022)** probaron la versión más simple, agregar «pensemos paso a paso»: en problemas de matemática escolar (GSM8K), un modelo de ese año pasó de 10,4 % a 40,7 % de aciertos." },
-            { t: "p", x: "Hoy el efecto es menor. Los modelos de razonamiento, como el modo «Pensar más profundo», ya trabajan por pasos sin que se lo pidas, y un estudio de Wharton de 2025 encontró que en ellos la instrucción agrega poco o nada de exactitud y alarga las respuestas. Sigue siendo útil para que el modelo **muestre** los pasos y puedas revisar cada cálculo: variaciones porcentuales, razones y descomposiciones." },
+            { t: "p", x: "Ahora bien, el efecto hoy es menor, ya que los modelos de razonamiento (como el modo «Pensar más profundo») trabajan por pasos sin que se lo pidan, y un estudio de Wharton de 2025 encontró que en ellos la instrucción agrega poco o nada de exactitud y alarga las respuestas. Sin perjuicio de ello, sigue siendo útil para que el modelo **muestre** los pasos y se pueda revisar cada cálculo, tales como variaciones porcentuales, razones y descomposiciones." },
             { t: "src", x: "Fuentes: Kojima et al., [«Large Language Models are Zero-Shot Reasoners»](https://arxiv.org/abs/2205.11916), NeurIPS 2022 (InstructGPT text-davinci-002); Meincke, Mollick et al., [«The Decreasing Value of Chain of Thought in Prompting»](https://arxiv.org/abs/2506.07142v1), Wharton Generative AI Labs, 8-jun-2025." },
             { t: "prompt-core", title: "CoT aplicado a variación de ventas",
               lines: [
@@ -585,7 +585,7 @@ window.COURSE_DATA = {
           eyebrow: "Técnica | Self-critique",
           title: "El modelo como su propio auditor",
           body: [
-            { t: "p", x: "Flujo de tres pasos. Ayuda a encontrar supuestos débiles y cifras dudosas porque obliga al modelo a explicitarlos. No reemplaza tu verificación: el mismo modelo que se equivocó puede pasar por alto su error." },
+            { t: "p", x: "Se trata de un flujo de tres pasos que ayuda a encontrar supuestos débiles y cifras dudosas, porque obliga al modelo a explicitarlos. Aun así, no reemplaza la verificación propia, ya que el mismo modelo que se equivocó puede pasar por alto su error." },
             { t: "grid3", items: [
               { title: "1 | Generar", body: "Prompt CORE normal. Recibes la primera respuesta." },
               { title: "2 | Criticar", body: "«¿Qué supuestos hiciste? ¿Qué cifra podría ser inventada? ¿Dónde hay riesgo de error?»" },
@@ -606,7 +606,7 @@ window.COURSE_DATA = {
               { title: "Respuesta rápida", body: "Para preguntas simples o de rutina: resúmenes cortos, reformulaciones." },
               { title: "Pensar más profundo", body: "Para preguntas complejas o abiertas: cálculos compuestos, análisis con varios pasos." },
             ]},
-            { t: "callout", kind: "tip", head: "Regla de bolsillo", x: "Parte en Automático. Si la respuesta sale pobre o el problema tiene varios pasos, cambia a Pensar más profundo. Recuerda que Copilot Chat (Basic) puede buscar en la web por su cuenta; si la información cambia rápido, pide las fuentes y revísalas." },
+            { t: "callout", kind: "tip", head: "Regla de bolsillo", x: "Conviene partir en Automático y cambiar a Pensar más profundo si la respuesta sale pobre o el problema tiene varios pasos. A su vez, Copilot Chat (Basic) puede buscar en la web por su cuenta, de modo que, si la información cambia rápido, hay que pedir las fuentes y revisarlas." },
             { t: "src", x: "Fuente: Microsoft Learn, [«Features in Copilot»](https://learn.microsoft.com/en-us/copilot/features), actualizado el 17-nov-2026. Microsoft advierte que estas opciones cambian a medida que llegan modelos nuevos." },
           ],
         },
@@ -617,7 +617,7 @@ window.COURSE_DATA = {
           eyebrow: "UI del chat",
           title: "Subir archivos",
           body: [
-            { t: "p", x: "Puedes adjuntar archivos junto con tu prompt. Microsoft no publica límites numéricos fijos para Copilot Chat (Basic): aplica límites de uso razonable que varían y avisa dentro del producto cuando una función deja de estar disponible por haber llegado al tope." },
+            { t: "p", x: "Copilot permite adjuntar archivos junto con el prompt y, si bien Microsoft no publica límites numéricos fijos para Copilot Chat (Basic), aplica límites de uso razonable que varían y avisa dentro del producto cuando una función deja de estar disponible por haber llegado al tope." },
             { t: "src", x: "Fuente: Microsoft Support, [«Limits for features in Copilot Chat»](https://support.microsoft.com/microsoft-365-copilot/limits-for-features-copilot-chat), actualizado el 18-nov-2026." },
             { t: "compare", bad: {
               head: "Suele leer mal",
@@ -626,7 +626,7 @@ window.COURSE_DATA = {
               head: "Suele leer bien",
               items: ["XLSX con tabla plana", "CSV anonimizado", "DOCX con encabezados claros", "Archivos Markdown (MD)"],
             }},
-            { t: "callout", kind: "alert", head: "Antes de subir", x: "Anonimiza el archivo primero. Placeholders como [CLIENTE_001] en la columna de clientes, [MONTO] en la de cifras sensibles si corresponde." },
+            { t: "callout", kind: "alert", head: "Antes de subir", x: "El archivo se anonimiza primero, con marcadores como [CLIENTE_001] en la columna de clientes o [MONTO] en la de cifras sensibles, si corresponde." },
           ],
         },
         {
@@ -643,7 +643,7 @@ window.COURSE_DATA = {
               head: "No conviene",
               items: ["Renders técnicos o planos", "Documentos oficiales", "Cualquier cosa con precisión métrica", "Gráficos con cifras reales (usa Excel/PBI)"],
             }},
-            { t: "callout", kind: "nota", head: "Cupo de imágenes", x: "La generación de imágenes está sujeta a límites de uso razonable. Microsoft no publica un número fijo por día; Copilot te avisa cuando llegas al tope." },
+            { t: "callout", kind: "nota", head: "Cupo de imágenes", x: "La generación de imágenes está sujeta a límites de uso razonable. Microsoft no publica un número fijo por día, y Copilot avisa cuando se llega al tope." },
           ],
         },
         {
@@ -720,7 +720,7 @@ window.COURSE_DATA = {
         "Parte en Automático; usa Pensar más profundo cuando la respuesta salga pobre.",
         "Antes de subir un archivo, anonimízalo y prefiere tablas planas.",
       ],
-      cliffhanger: "¿Qué pasa cuando el lunes necesitas el mismo contexto que cargaste hoy? El próximo bloque trata de memoria, colaboración y agentes.",
+      cliffhanger: "¿Qué pasa cuando el lunes se necesita el mismo contexto que se cargó hoy? A eso responden la memoria, la colaboración y los agentes, temas del próximo bloque.",
       aforismo: "Pensar más profundo toma más tiempo y sale más barato que corregir después.",
     },
 
@@ -730,9 +730,9 @@ window.COURSE_DATA = {
     {
       id: "b4",
       num: 4,
-      title: "Biblioteca, Páginas y Agentes",
+      title: "Páginas, Biblioteca y agentes",
       eyebrow: "Bloque 04 | 30 min",
-      lede: "Cierre con funciones de equipo y de memoria. Al final construyes un agente simple y te lo llevas listo.",
+      lede: "El cierre del curso revisa las funciones de equipo y de memoria, y termina con la construcción de un agente simple que queda listo para usar.",
       badge: "4 lecciones | Quiz",
       lessons: [
         {
@@ -742,7 +742,7 @@ window.COURSE_DATA = {
           eyebrow: "Colaboración",
           title: "Páginas y Biblioteca",
           body: [
-            { t: "p", x: "**Páginas** es un lienzo editable y colaborativo que nace desde el chat. Bajo una respuesta de Copilot, abre el menú de tres puntos y elige **Editar en Páginas**; puedes enviar la respuesta a una página nueva o a una existente. Luego compartes la página con tu equipo, la editan juntos y pueden seguir pidiéndole cambios a Copilot dentro de ella." },
+            { t: "p", x: "**Páginas** es un lienzo editable y colaborativo que nace desde el chat. Para usarlo se abre el menú de tres puntos bajo una respuesta de Copilot y se elige **Editar en Páginas**, con lo cual la respuesta pasa a una página nueva o a una existente, que luego puede compartirse con el equipo para editarla en conjunto y seguir pidiéndole cambios a Copilot dentro de ella." },
             { t: "p", x: "Las páginas que has creado quedan en la **Biblioteca** de Copilot hasta que las borres. Están disponibles sin licencia de Copilot para cuentas del trabajo que tengan almacenamiento en SharePoint u OneDrive." },
             { t: "schema", label: "Esquema ilustrativo (la interfaz puede variar)", parts: [
               { kind: "topbar" },
@@ -765,7 +765,7 @@ window.COURSE_DATA = {
           eyebrow: "Memoria",
           title: "Personalización | instrucciones personalizadas y memoria",
           body: [
-            { t: "p", x: "En la configuración del chat, sección **Personalización**, puedes escribir **instrucciones personalizadas**: quién eres, qué haces y cómo quieres que te responda. Copilot las aplica en cada conversación y no tienes que repetirlas. Copilot también tiene una **memoria** (en vista previa) que guarda datos de tus conversaciones; tu organización puede tenerla desactivada." },
+            { t: "p", x: "En la configuración del chat, sección **Personalización**, se pueden escribir **instrucciones personalizadas** que indiquen quién eres, qué haces y cómo quieres que Copilot responda, de modo que las aplique en cada conversación sin repetirlas. A su vez, Copilot tiene una **memoria** (en vista previa) que guarda datos de las conversaciones, aunque la organización puede tenerla desactivada." },
             { t: "src", x: "Fuentes: Microsoft Support, [«Customize how Microsoft 365 Copilot responds to you»](https://support.microsoft.com/en-us/microsoft-365-copilot/customize-how-microsoft-365-copilot-responds-to-you); Microsoft Learn, [«Copilot personalization and memory»](https://learn.microsoft.com/copilot/microsoft-365/copilot-personalization-memory), actualizado el 3-nov-2026. Los nombres de los menús pueden variar según idioma y versión." },
             { t: "compare", good: {
               head: "Sí poner",
@@ -809,7 +809,7 @@ window.COURSE_DATA = {
         },
       ],
       quiz: {
-        title: "Quiz Bloque 4 | Biblioteca, Páginas y Agentes",
+        title: "Quiz Bloque 4 | Páginas, Biblioteca y agentes",
         questions: [
           {
             stem: "Un agente construido con Agent Builder en Copilot Básico puede:",
@@ -851,7 +851,7 @@ window.COURSE_DATA = {
         "Agent Builder incluido: hasta 4 URL públicas; los datos de la empresa se cobran por consumo.",
         "Construye tu primer agente con CORE en las instrucciones.",
       ],
-      cliffhanger: "Si además de Copilot usas Claude, el anexo práctico que sigue parte desde cero.",
+      cliffhanger: "Para quienes además de Copilot usan Claude, el anexo práctico que sigue parte desde cero.",
       aforismo: "Copilot rinde más en manos de quien piensa con criterio.",
     },
 
@@ -864,7 +864,7 @@ window.COURSE_DATA = {
       num: 5,
       title: "Claude desde cero",
       eyebrow: "Bloque 05 | Anexo práctico | 40 min",
-      lede: "Para quienes han usado Claude poco o nada. Las reglas del curso (CORE, anonimizar, verificar) aplicadas a otra herramienta, paso a paso.",
+      lede: "Anexo para quienes han usado Claude poco o nada, que aplica paso a paso a otra herramienta las mismas reglas del curso (CORE, anonimizar y verificar).",
       badge: "8 lecciones | Quiz",
       lessons: [
         {
@@ -874,13 +874,13 @@ window.COURSE_DATA = {
           eyebrow: "Acceso",
           title: "Crear la cuenta e iniciar sesión",
           body: [
-            { t: "p", x: "Claude funciona en el navegador (**claude.ai**), en una app de escritorio para Mac y Windows, y en apps para iOS y Android. La misma cuenta sirve en todos lados y tus conversaciones se sincronizan." },
+            { t: "p", x: "Claude funciona en el navegador (**claude.ai**), en una app de escritorio para Mac y Windows y en apps para iOS y Android, con una misma cuenta para todas ellas." },
             { t: "grid3", items: [
-              { title: "1 | Entra a claude.ai", body: "Elige continuar con tu cuenta de Google o con tu correo. Con correo, Claude te envía un enlace seguro (o un código, si lo abres en otro dispositivo)." },
-              { title: "2 | Verifica lo que pida", body: "Al crear la cuenta puede pedirte confirmar un número de teléfono. Debes tener 18 años o más y estar en un país donde Claude esté disponible; Chile lo está." },
-              { title: "3 | Instala las apps si te sirven", body: "La app de escritorio y la móvil son opcionales. Sirven para tener Claude a mano fuera del navegador." },
+              { title: "1 | Entra a claude.ai", body: "Elige continuar con tu cuenta de Google o con tu correo. En el segundo caso, Claude envía un enlace seguro (o un código, si se abre en otro dispositivo)." },
+              { title: "2 | Verifica lo que pida", body: "Al crear la cuenta puede pedir confirmar un número de teléfono. Se exige tener 18 años o más y estar en un país donde Claude esté disponible, lista que incluye a Chile." },
+              { title: "3 | Instala las apps si te sirven", body: "Las apps de escritorio y móvil son opcionales y sirven para tener Claude a mano fuera del navegador." },
             ]},
-            { t: "callout", kind: "nota", head: "Si tu empresa ya tiene Claude", x: "Si tu organización contrató un plan Team o Enterprise, entra con la cuenta corporativa (a veces con inicio de sesión único). Así tus conversaciones quedan bajo el contrato de la empresa y no bajo los términos de una cuenta personal." },
+            { t: "callout", kind: "nota", head: "Si tu empresa ya tiene Claude", x: "Si la organización contrató un plan Team o Enterprise, conviene entrar con la cuenta corporativa (a veces con inicio de sesión único), de modo que las conversaciones queden bajo el contrato de la empresa y no bajo los términos de una cuenta personal." },
             { t: "src", x: "Fuentes: Claude Help Center, [«Get started with Claude»](https://support.claude.com/en/articles/8114491-get-started-with-claude) y [«Log in to your Claude account»](https://support.claude.com/en/articles/13189465-log-in-to-your-claude-account), consultados el 20-nov-2026; Anthropic, [«Supported countries and regions»](https://www.anthropic.com/supported-countries), consultado el 20-nov-2026 (incluye Chile)." },
           ],
         },
@@ -892,11 +892,11 @@ window.COURSE_DATA = {
           title: "Qué distingue los planes",
           body: [
             { t: "grid3", items: [
-              { title: "Gratuito", body: "Para partir. Tiene un límite de uso por sesión que se reinicia cada cinco horas y permite hasta cinco proyectos." },
-              { title: "Pro, Max y Ultra", body: "Planes individuales de pago con más uso que el gratuito. Pro tiene además un límite semanal y prioridad en horas de alta demanda; Max y Ultra apuntan a uso intensivo." },
-              { title: "Team y Enterprise", body: "Para organizaciones. Team va de 2 a 150 personas, con administración y facturación centralizadas, inicio de sesión único y proyectos compartidos." },
+              { title: "Gratuito", body: "Sirve para partir, con un límite de uso por sesión que se reinicia cada cinco horas y hasta cinco proyectos." },
+              { title: "Pro, Max y Ultra", body: "Planes individuales de pago con más uso que el gratuito. Pro suma un límite semanal y prioridad en horas de alta demanda, mientras Max y Ultra apuntan a un uso intensivo." },
+              { title: "Team y Enterprise", body: "Son los planes para organizaciones. Team va de 2 a 150 personas e incluye administración y facturación centralizadas, inicio de sesión único y proyectos compartidos." },
             ]},
-            { t: "callout", kind: "tip", head: "Precios", x: "No los incluimos porque cambian y dependen del país. Revísalos en la página de precios de Claude antes de decidir." },
+            { t: "callout", kind: "tip", head: "Precios", x: "Este anexo no incluye precios, ya que cambian con frecuencia y dependen del país, por lo que deben revisarse en la página de precios de Claude antes de decidir." },
             { t: "src", x: "Fuentes: Claude Help Center, [«What is the Pro plan?»](https://support.claude.com/en/articles/8325606-what-is-the-pro-plan), [«What is the Team plan?»](https://support.claude.com/en/articles/9266767-what-is-the-team-plan) y [«What are projects?»](https://support.claude.com/en/articles/9517075-what-are-projects), consultados el 20-nov-2026." },
           ],
         },
@@ -907,7 +907,7 @@ window.COURSE_DATA = {
           eyebrow: "Primera conversación",
           title: "Tu primer pedido, con CORE",
           body: [
-            { t: "p", x: "Escribe como le escribirías a un colega. El botón **+** del cuadro de chat (o escribir «/») muestra las demás opciones: adjuntar archivos, conectores y otras herramientas. El esquema CORE que ya conoces funciona igual que en Copilot." },
+            { t: "p", x: "A Claude se le escribe como a un colega, y el botón **+** del cuadro de chat (o escribir «/») muestra las demás opciones, tales como adjuntar archivos, conectores y otras herramientas. Así, el esquema CORE que ya conoces funciona igual que en Copilot." },
             { t: "prompt-core", title: "Ejemplo CORE en Claude",
               lines: [
                 { tag: "C", x: "Soy gerente comercial de una pyme de servicios en Concepción. Estamos evaluando lanzar un servicio de mantención preventiva para clientes industriales." },
@@ -916,7 +916,7 @@ window.COURSE_DATA = {
                 { tag: "E", x: "Una tabla con tres columnas: pregunta | por qué importa | cómo la respondería con poco presupuesto." },
               ],
             },
-            { t: "callout", kind: "tip", head: "Itera en la misma conversación", x: "Si la primera respuesta no sirve, corrige ahí mismo: «la columna 3 es muy genérica, dame ejemplos para Concepción». Pídele también que marque lo que no sabe con certeza." },
+            { t: "callout", kind: "tip", head: "Itera en la misma conversación", x: "Si la primera respuesta no sirve, se corrige en la misma conversación (por ejemplo, «la columna 3 es muy genérica, dame ejemplos para Concepción») y se le pide que marque lo que no sabe con certeza." },
             { t: "src", x: "Fuente: Claude Help Center, [«Get started with Claude»](https://support.claude.com/en/articles/8114491-get-started-with-claude), consultado el 20-nov-2026." },
           ],
         },
@@ -927,14 +927,14 @@ window.COURSE_DATA = {
           eyebrow: "Archivos",
           title: "Subir archivos y pedir análisis",
           body: [
-            { t: "p", x: "Adjunta archivos con el botón **+**, arrastrándolos al chat o pegando imágenes. Claude lee PDF, Word, CSV, texto, HTML, JSON, Excel e imágenes (JPEG, PNG, GIF, WebP)." },
+            { t: "p", x: "Los archivos se adjuntan con el botón **+**, arrastrándolos al chat o pegando imágenes. Claude lee PDF, Word, CSV, texto, HTML, JSON y Excel, además de imágenes en JPEG, PNG, GIF y WebP." },
             { t: "bignums", items: [
               { n: "20", l: "Archivos por conversación", c: "marine" },
               { n: "500 MB", l: "Tamaño máximo por archivo en el chat", c: "burgundy", fs: 64 },
               { n: "30 MB", l: "Tamaño máximo por archivo en un proyecto", c: "olive", fs: 64 },
             ]},
-            { t: "callout", kind: "alert", head: "Antes de subir", x: "Anonimiza igual que en Copilot: reemplaza nombres, RUT, correos y montos sensibles por marcadores. Para analizar planillas Excel, Claude necesita tener activada la capacidad de crear y editar archivos (ejecución de código) en la configuración." },
-            { t: "p", x: "Para análisis numérico, pide que muestre el cálculo y la fórmula que usó. Así puedes rehacerlo en Excel y comparar." },
+            { t: "callout", kind: "alert", head: "Antes de subir", x: "La anonimización es la misma que en Copilot, reemplazando nombres, RUT, correos y montos sensibles por marcadores. Para analizar planillas Excel, a su vez, Claude necesita tener activada en la configuración la capacidad de crear y editar archivos (ejecución de código)." },
+            { t: "p", x: "En el análisis numérico conviene pedir que muestre el cálculo y la fórmula que usó, de modo que se pueda rehacer en Excel y comparar." },
             { t: "src", x: "Fuente: Claude Help Center, [«Upload files to Claude»](https://support.claude.com/en/articles/8241126-upload-files-to-claude), 23-jul-2026." },
           ],
         },
@@ -945,12 +945,12 @@ window.COURSE_DATA = {
           eyebrow: "Proyectos",
           title: "Proyectos con instrucciones y archivos",
           body: [
-            { t: "p", x: "Un **proyecto** es un espacio de trabajo con sus propias conversaciones, **instrucciones** (por ejemplo, tono formal o un rol profesional) y **archivos de referencia**. Todo chat que abras dentro del proyecto parte con ese contexto, sin que tengas que repetirlo." },
+            { t: "p", x: "Un **proyecto** es un espacio de trabajo con sus propias conversaciones, **instrucciones** (por ejemplo, tono formal o un rol profesional) y **archivos de referencia**, de modo que todo chat que se abra dentro de él parte con ese contexto sin repetirlo." },
             { t: "grid2", items: [
-              { title: "Qué ofrece", body: "Disponible en todos los planes; el gratuito permite hasta cinco proyectos. En los planes de pago, si los archivos superan el contexto, Claude pasa a un modo de búsqueda que amplía la capacidad hasta diez veces." },
+              { title: "Qué ofrece", body: "Está disponible en todos los planes, y el gratuito permite hasta cinco proyectos. En los planes de pago, si los archivos superan el contexto, Claude pasa a un modo de búsqueda que amplía la capacidad hasta diez veces." },
               { title: "En equipo", body: "En Team y Enterprise puedes compartir un proyecto con permiso para ver (usar y conversar) o para editar (cambiar instrucciones y archivos)." },
             ]},
-            { t: "callout", kind: "nota", head: "Lo que ya conoces", x: "Un proyecto cumple la función del agente que armaste en Agent Builder (Bloque 4) y del agente con instrucciones y archivos del Taller 4 del MBA: instrucciones fijas más documentos de referencia. Puedes reutilizar las mismas instrucciones CORE." },
+            { t: "callout", kind: "nota", head: "Lo que ya conoces", x: "Un proyecto cumple la función del agente que armaste en Agent Builder (Bloque 4) y del agente con instrucciones y archivos del Taller 4 del MBA, esto es, instrucciones fijas más documentos de referencia, y admite las mismas instrucciones CORE." },
             { t: "src", x: "Fuente: Claude Help Center, [«What are projects?»](https://support.claude.com/en/articles/9517075-what-are-projects), consultado el 20-nov-2026." },
           ],
         },
@@ -962,10 +962,10 @@ window.COURSE_DATA = {
           title: "Artefactos, búsqueda web, conectores y skills",
           body: [
             { t: "grid2", items: [
-              { title: "Artefactos", body: "Contenido sustancial que Claude abre al lado de la conversación: documentos, código, sitios de una página, diagramas, tableros o herramientas pequeñas. Parten privados y quedan guardados en la sección de artefactos. Requieren activar la capacidad de crear y editar archivos." },
-              { title: "Búsqueda web", body: "Claude puede buscar en la web y cita sus fuentes en cada respuesta. Según la versión que tengas, se activa desde el botón **+** o Claude decide solo cuándo buscar. En Team y Enterprise primero la habilita un administrador." },
-              { title: "Conectores", body: "Conectan Claude con tus aplicaciones (Google Drive, Gmail, Slack, Microsoft 365, entre otras) usando tus mismos permisos. Al conectar un servicio autorizas a Claude a leer y, según el caso, modificar datos en él. El plan gratuito admite un conector personalizado." },
-              { title: "Skills", body: "Carpetas de instrucciones, scripts y recursos que Claude carga cuando son pertinentes. Anthropic ofrece skills para Excel, Word, PowerPoint y PDF que se usan solas; tú o tu organización pueden crear otras. Requieren tener activada la ejecución de código." },
+              { title: "Artefactos", body: "Contenido de cierta extensión que Claude abre al lado de la conversación, tales como documentos, código, sitios de una página, diagramas, tableros o herramientas pequeñas. Parten privados, quedan guardados en la sección de artefactos y requieren activar la capacidad de crear y editar archivos." },
+              { title: "Búsqueda web", body: "Claude puede buscar en la web y cita sus fuentes en cada respuesta. Según la versión, se activa desde el botón **+** o Claude decide por sí solo cuándo buscar, y en Team y Enterprise primero debe habilitarla un administrador." },
+              { title: "Conectores", body: "Conectan Claude con tus aplicaciones (Google Drive, Gmail, Slack o Microsoft 365, entre otras) usando tus mismos permisos. Al conectar un servicio se autoriza a Claude a leer y, según el caso, modificar datos en él, y el plan gratuito admite un conector personalizado." },
+              { title: "Skills", body: "Carpetas de instrucciones, scripts y recursos que Claude carga cuando son pertinentes. Anthropic ofrece skills para Excel, Word, PowerPoint y PDF que se usan solas, y cada persona u organización puede crear otras, siempre con la ejecución de código activada." },
             ]},
             { t: "src", x: "Fuentes (Claude Help Center, consultados el 20-nov-2026): [«What are artifacts and how do I use them?»](https://support.claude.com/en/articles/17153992-what-are-artifacts-and-how-do-i-use-them); [«Enable and use web search»](https://support.claude.com/en/articles/10684626-enable-and-use-web-search); [«Use connectors to extend Claude's capabilities»](https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities); [«What are skills?»](https://support.claude.com/en/articles/12512176-what-are-skills). Los nombres de menús cambian seguido, por eso describimos la función sin la ruta exacta." },
           ],
@@ -984,7 +984,7 @@ window.COURSE_DATA = {
               head: "No delegar",
               items: ["La decisión final y su firma", "Cifras que van al directorio sin recalcularlas", "Citas o fuentes sin abrir el enlace", "Datos personales o confidenciales sin anonimizar"],
             }},
-            { t: "callout", kind: "alert", head: "Tus datos y el entrenamiento", x: "En los planes individuales (gratuito, Pro y Max), Anthropic puede usar tus chats para entrenar modelos si lo permites en la opción de mejora del modelo de tu configuración de privacidad; los chats de incógnito quedan fuera. En los planes comerciales (Team, Enterprise y la API) no se usan por defecto. Para información de la empresa, usa la cuenta corporativa si existe y anonimiza igual: la Ley 21.719 aplicará a cualquier herramienta." },
+            { t: "callout", kind: "alert", head: "Tus datos y el entrenamiento", x: "En los planes individuales (gratuito, Pro y Max), Anthropic puede usar las conversaciones para entrenar modelos si el usuario lo permite en la opción de mejora del modelo de su configuración de privacidad, con excepción de los chats de incógnito. En los planes comerciales (Team, Enterprise y la API), en cambio, no se usan por defecto. Por lo mismo, para información de la empresa conviene usar la cuenta corporativa si existe y anonimizar de todos modos, ya que la Ley 21.719 aplicará a cualquier herramienta." },
             { t: "src", x: "Fuentes: Claude Privacy Center, [«Is my data used for model training?»](https://privacy.claude.com/en/articles/10023580-is-my-data-used-for-model-training), 16-mar-2026 (planes individuales), y [mismo título para productos comerciales](https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training), 18-ago-2026." },
           ],
         },
@@ -996,7 +996,7 @@ window.COURSE_DATA = {
           title: "Caso de empresa | leer los resultados de una puerta falsa",
           kind: "exercise",
           body: [
-            { t: "p", x: "Tu equipo terminó un experimento de puerta falsa: una página publicada en Netlify, un formulario en Tally y el conteo de visitas en GoatCounter. Tienes dos exportaciones en CSV, visitas por día y respuestas del formulario. El comité quiere saber si conviene seguir." },
+            { t: "p", x: "Tu equipo terminó un experimento de puerta falsa con una página publicada en Netlify, un formulario en Tally y el conteo de visitas en GoatCounter, del cual quedan dos exportaciones en CSV (visitas por día y respuestas del formulario), con las que el comité quiere saber si vale la pena seguir." },
             { t: "agent-steps", steps: [
               { n: "1", title: "Anonimiza", body: "En el CSV de Tally reemplaza nombres, correos y teléfonos por marcadores ([CONTACTO_1], [DATO_CONTACTO])." },
               { n: "2", title: "Crea un proyecto", body: "Llámalo «Validación de demanda» y escribe sus instrucciones con CORE (usa la caja de abajo)." },
@@ -1047,12 +1047,12 @@ window.COURSE_DATA = {
         ],
       },
       paraLlevar: [
-        "Mismas reglas que en Copilot: CORE, anonimizar y verificar.",
+        "Las reglas de Copilot valen igual en Claude (CORE, anonimizar y verificar).",
         "Un proyecto con instrucciones y archivos evita repetir el contexto.",
-        "Revisa la opción de privacidad de tu cuenta y prefiere la cuenta corporativa para datos de la empresa.",
+        "Para datos de la empresa, usa la cuenta corporativa y revisa la opción de privacidad.",
       ],
       cliffhanger: "",
-      aforismo: "Claude redacta y calcula rápido; la firma del informe sigue siendo tuya.",
+      aforismo: "Claude redacta y calcula rápido, pero la firma del informe sigue siendo tuya.",
     },
   ],
 };

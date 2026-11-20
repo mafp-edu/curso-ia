@@ -4,6 +4,8 @@ Curso autoguiado sobre el uso responsable de IA generativa en el trabajo, prepar
 
 Sitio publicado: https://mafp-edu.github.io/curso-ia/
 
+© 2026 Miguel Ángel Fernández. Todos los derechos reservados (ver `LICENSE`).
+
 ## Cómo verlo localmente
 
 El sitio es estático. Basta con servir la carpeta con cualquier servidor web, por ejemplo:
@@ -12,21 +14,30 @@ El sitio es estático. Basta con servir la carpeta con cualquier servidor web, p
 python3 -m http.server 8000
 ```
 
-y abrir http://localhost:8000 en el navegador. Abrir `index.html` directamente desde el disco no funciona, porque el navegador bloquea la carga de los archivos `.jsx`.
+y abrir http://localhost:8000 en el navegador. Si se abre `index.html` directamente desde el disco, algunos navegadores bloquean los scripts locales.
 
-Se necesita conexión a internet: React, Babel y las fuentes se cargan desde CDN.
+React se sirve desde la carpeta `vendor/`, así que el sitio no depende de un CDN. Solo las fuentes tipográficas se cargan desde Google Fonts y, sin conexión, se usan las del sistema.
+
+## Cómo editar
+
+- **Textos del curso**: se editan directo en `content.js` (`window.COURSE_DATA`) y no requieren compilar. Las cifras y hechos verificables llevan su fuente con fecha en partes `{ t: "src", x: "..." }`.
+- **Interfaz** (`app.jsx`, `components.jsx`): después de editarlos hay que compilar con un solo comando.
+
+```bash
+npm install      # solo la primera vez
+npm run build    # genera dist/app.min.js y copia React a vendor/
+```
+
+Hay que hacer commit de `dist/` y `vendor/`, porque GitHub Pages publica los archivos tal como están en `main`, sin paso de compilación.
 
 ## Archivos
 
-- `index.html`: carga React 18 (build de producción) y Babel, que transforma los `.jsx` en el navegador.
-- `content.js`: todo el contenido del curso en `window.COURSE_DATA` (bloques, lecciones, quizzes y fuentes).
-- `components.jsx`: piezas de presentación de cada tipo de contenido.
-- `app.jsx`: estructura de la página, progreso, quiz, modo proyector, impresión y ajustes.
+- `index.html`: carga React, el contenido y la app compilada.
+- `content.js`: todo el contenido del curso (bloques, lecciones, quizzes y fuentes).
+- `components.jsx` y `app.jsx`: código fuente de la interfaz (progreso, quiz, modo proyector, impresión, ajustes y avance guardado en el navegador).
+- `dist/app.min.js`: la interfaz compilada; no se edita a mano.
+- `vendor/`: React y ReactDOM 18.3.1 de producción (licencia MIT).
 - `styles.css`: estilos.
-- `uploads/`: prompt original con que se generó la primera versión del curso.
+- `build.mjs` y `package.json`: script de compilación con esbuild.
 
-Para cambiar textos basta con editar `content.js`. Las cifras y hechos verificables llevan su fuente con fecha en partes `{ t: "src", x: "..." }`.
-
-## Publicación
-
-GitHub Pages publica la rama `main` tal como está, sin paso de compilación.
+El avance de cada persona (lecciones, respuestas y ajustes) se guarda en su navegador con la clave `curso-ia:v1`. Si se cambia mucho la estructura del curso, conviene subir la versión de la clave en `app.jsx` (`STORAGE_KEY`).
