@@ -1,10 +1,33 @@
-// Main app components
+// Componentes principales de la app
 
 const { useState: useStateA, useMemo: useMemoA, useEffect: useEffectA } = React;
 
-function Quiz({ quiz, onComplete }) {
-  const [answers, setAnswers] = useStateA({});
+// Avance guardado en el navegador (localStorage). Si el navegador no lo
+// permite (modo privado estricto, almacenamiento lleno), el sitio sigue
+// funcionando y simplemente no guarda.
+const STORAGE_KEY = "curso-ia:v1";
 
+function loadSaved() {
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    const data = raw ? JSON.parse(raw) : null;
+    return data && typeof data === "object" ? data : {};
+  } catch (_) {
+    return {};
+  }
+}
+
+function saveState(state) {
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (_) { /* sin guardado */ }
+}
+
+function clearSaved() {
+  try { window.localStorage.removeItem(STORAGE_KEY); } catch (_) { /* nada que borrar */ }
+}
+
+function Quiz({ quiz, answers, setAnswers, onComplete }) {
   const pickAnswer = (qi, oi) => {
     if (answers[qi] != null) return;
     const next = { ...answers, [qi]: oi };
@@ -166,7 +189,7 @@ function Celebration({ onPrint, onReset, stats }) {
   );
 }
 
-function BlockView({ block, completed, toggleLesson, quizCompleted, onQuizDone, showCelebration, celebrationProps, nav }) {
+function BlockView({ block, completed, toggleLesson, quizAnswers, setQuizAnswers, onQuizDone, showCelebration, celebrationProps, nav }) {
   return (
     <div className="main">
       <div className="block-header">
@@ -186,7 +209,7 @@ function BlockView({ block, completed, toggleLesson, quizCompleted, onQuizDone, 
           onToggle={() => toggleLesson(lesson.id)}
         />
       ))}
-      <Quiz key={block.id} quiz={block.quiz} onComplete={onQuizDone} />
+      <Quiz key={block.id} quiz={block.quiz} answers={quizAnswers} setAnswers={setQuizAnswers} onComplete={onQuizDone} />
       <WrapUp block={block} />
       {showCelebration && <Celebration {...celebrationProps} />}
       {nav}
@@ -333,18 +356,14 @@ function TweaksPanel({ config, setConfig, onClose }) {
 
 function App() {
   const data = window.COURSE_DATA;
+  const saved = useMemoA(loadSaved, []);
+  const validBlock = (id) => data.blocks.some(b => b.id === id);
 
-  // load persisted state (not localStorage — per-tab memory is fine; prompt forbids storage)
-  const [activeBlockId, setActiveBlockId] = useStateA(() => {
-    try { return window.__curso_state?.activeBlockId || data.blocks[0].id; } catch (_) { return data.blocks[0].id; }
-  });
+  const [activeBlockId, setActiveBlockId] = useStateA(() => validBlock(saved.activeBlockId) ? saved.activeBlockId : data.blocks[0].id);
   const [activeLessonId, setActiveLessonId] = useStateA(null);
-  const [completed, setCompleted] = useStateA(() => {
-    try { return window.__curso_state?.completed || {}; } catch (_) { return {}; }
-  });
-  const [quizCompleted, setQuizCompleted] = useStateA(() => {
-    try { return window.__curso_state?.quizCompleted || {}; } catch (_) { return {}; }
-  });
+  const [completed, setCompleted] = useStateA(() => saved.completed || {});
+  const [quizCompleted, setQuizCompleted] = useStateA(() => saved.quizCompleted || {});
+  const [quizAnswers, setQuizAnswers] = useStateA(() => saved.quizAnswers || {});
   const [projector, setProjector] = useStateA(false);
   const [tweaksOpen, setTweaksOpen] = useStateA(false);
 
@@ -353,12 +372,12 @@ function App() {
     "density": "normal",
     "bignums": "on"
   }/*EDITMODE-END*/;
-  const [config, setConfig] = useStateA(TWEAK_DEFAULTS);
+  const [config, setConfig] = useStateA(() => ({ ...TWEAK_DEFAULTS, ...(saved.config || {}) }));
 
-  // persist in window (survives re-render but not reload — that's acceptable)
+  // Guarda el avance y los ajustes en el navegador en cada cambio.
   useEffectA(() => {
-    window.__curso_state = { activeBlockId, completed, quizCompleted };
-  }, [activeBlockId, completed, quizCompleted]);
+    saveState({ activeBlockId, completed, quizCompleted, quizAnswers, config });
+  }, [activeBlockId, completed, quizCompleted, quizAnswers, config]);
 
   // Tweaks edit-mode protocol
   useEffectA(() => {
@@ -400,11 +419,17 @@ function App() {
 
   const onPrint = () => window.print();
   const onReset = () => {
+    clearSaved();
     setCompleted({});
     setQuizCompleted({});
+    setQuizAnswers({});
     setActiveBlockId(data.blocks[0].id);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+  const onResetAsk = () => {
+    if (window.confirm("¿Borrar el avance guardado en este navegador? Se desmarcarán las lecciones y se borrarán las respuestas de los quizzes.")) onReset();
+  };
+  const setBlockAnswers = (ans) => setQuizAnswers(q => ({ ...q, [activeBlockId]: ans }));
 
   const appClass = [
     "app",
@@ -452,11 +477,15 @@ function App() {
         block={activeBlock}
         completed={completed}
         toggleLesson={toggleLesson}
-        quizCompleted={quizCompleted[activeBlockId]}
+        quizAnswers={quizAnswers[activeBlockId] || {}}
+        setQuizAnswers={setBlockAnswers}
         onQuizDone={onQuizDone}
         showCelebration={isLastBlock && allDone}
-        celebrationProps={{ onPrint, onReset, stats: celebrationStats }}
-        nav={<BlockNav data={data} activeBlockId={activeBlockId} setActiveBlockId={setActiveBlockId} />}
+        celebrationProps={{ onPrint, onReset: onResetAsk, stats: celebrationStats }}
+        nav={<>
+          <BlockNav data={data} activeBlockId={activeBlockId} setActiveBlockId={setActiveBlockId} />
+          <SiteFooter onResetAsk={onResetAsk} />
+        </>}
       />
       {tweaksOpen && <TweaksPanel config={config} setConfig={setConfig} onClose={() => setTweaksOpen(false)} />}
     </div>
@@ -484,6 +513,15 @@ function BlockNav({ data, activeBlockId, setActiveBlockId }) {
         </button>
       )}
     </nav>
+  );
+}
+
+function SiteFooter({ onResetAsk }) {
+  return (
+    <footer className="site-footer">
+      <span>© 2026 Miguel Ángel Fernández. Todos los derechos reservados.</span>
+      <button className="link-btn" onClick={onResetAsk} title="Borra el avance guardado en este navegador">Reiniciar avance</button>
+    </footer>
   );
 }
 
