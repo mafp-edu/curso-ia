@@ -1289,7 +1289,9 @@ html, body {
   .lesson-body a { color: inherit; }
   .app { display: block; }
   .main { padding: 0; max-width: 100%; }
-  .lesson { page-break-inside: avoid; border: 1px solid #ccc; }
+  .lesson { break-inside: auto; border: 1px solid #ccc; }
+  .lesson-head, .card, .callout, .compare-col, .prompt, .big-number, .llm-reveal, .agent-step, .wrap-up > * { break-inside: avoid; }
+  .lesson-head { break-after: avoid; }
   .celebration { background: white !important; color: var(--ink) !important; border: 2px solid var(--burgundy); }
   .celebration h2, .celebration p, .celebration-quote { color: var(--ink) !important; }
 }
