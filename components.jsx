@@ -3,12 +3,19 @@
 
 const { useState, useMemo, useCallback } = React;
 
-// Inline markdown: **bold** and *italic*. Returns HTML string for dangerouslySetInnerHTML.
+// Markdown mínimo: **negrita**, *cursiva* y [texto](https://url).
+// Devuelve HTML para dangerouslySetInnerHTML. El contenido viene solo de content.js.
 function md(s) {
   if (s == null) return "";
   return String(s)
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     .replace(/(^|[^\*])\*([^\*\n]+?)\*(?!\*)/g, "$1<em>$2</em>");
+}
+
+// Fuente verificable con fecha, en letra pequeña bajo una cifra o un hecho.
+function Source({ x }) {
+  return <p className="src" dangerouslySetInnerHTML={{ __html: md(x) }} />;
 }
 
 // ---------- Primitives ----------
@@ -78,7 +85,7 @@ function PromptRaw({ text }) {
   return (
     <div className="prompt">
       <div className="prompt-head">
-        <span className="prompt-meta" style={{ color: "#E8A78E" }}>⚠ Prompt SIN anonimizar (ejemplo)</span>
+        <span className="prompt-meta" style={{ color: "#E8A78E" }}>⚠ Prompt sin anonimizar (ejemplo)</span>
         <CopyButton text={text} />
       </div>
       <div className="prompt-body" style={{ color: "#F1D9CC" }}>{text}</div>
@@ -100,7 +107,7 @@ function BigNumbers({ items }) {
     <div className="grid-3" style={{ margin: "8px 0 16px" }}>
       {items.map((it, i) => (
         <div key={i}>
-          <div className={`big-number ${it.c || ""}`} style={it.fs ? { fontSize: `${it.fs}px` } : undefined}>{it.n}</div>
+          <div className={`big-number ${it.c || ""}`} style={it.fs ? { "--bn-fs": `${it.fs}px` } : undefined}>{it.n}</div>
           <div className="big-number-label">{it.l}</div>
           {it.sub && <div className="big-number-sub">{it.sub}</div>}
         </div>
@@ -200,7 +207,7 @@ function Schema({ label, parts }) {
                 <span className="schema-dot" />
                 <span className="schema-dot" />
                 <span style={{ flex: 1 }} />
-                <span style={{ fontFamily: "monospace", fontSize: 11, color: "var(--ink-3)" }}>m365.cloud.microsoft/chat</span>
+                <span style={{ fontFamily: "monospace", fontSize: 11, color: "var(--ink-3)" }}>copilot.cloud.microsoft</span>
               </div>
             );
           }
@@ -267,7 +274,7 @@ function AforismoMini({ x }) {
       fontWeight: 500,
       lineHeight: 1.4,
       color: "var(--ink)",
-      borderRadius: "0 10px 10px 0",
+      borderRadius: "0 4px 4px 0",
     }}>
       {x}
     </div>
@@ -280,7 +287,8 @@ function ExerciseTextarea() {
   return (
     <>
       <textarea
-        placeholder="[C] Soy analista de...&#10;[O] Necesito un...&#10;[R] No inventes...&#10;[E] Formato: ..."
+        placeholder={"[C] Soy analista de...\n[O] Necesito un...\n[R] No inventes...\n[E] Formato: ..."}
+        aria-label="Escribe tu prompt CORE"
         value={value}
         onChange={e => setValue(e.target.value)}
       />
@@ -288,7 +296,7 @@ function ExerciseTextarea() {
         {[
           { k: "c", letter: "C", label: "Contexto claro", sub: "Rol, empresa" },
           { k: "o", letter: "O", label: "Objetivo específico", sub: "Entregable concreto" },
-          { k: "r", letter: "R", label: "Restricciones", sub: "Largo, qué NO" },
+          { k: "r", letter: "R", label: "Restricciones", sub: "Largo, qué evitar" },
           { k: "e", letter: "E", label: "Expectativas", sub: "Formato, tono" },
         ].map(it => (
           <button
@@ -298,7 +306,7 @@ function ExerciseTextarea() {
           >
             <span className="rubric-check">{rubric[it.k] ? "✓" : ""}</span>
             <span>
-              <span className="rubric-label">{it.letter} · {it.label}</span>
+              <span className="rubric-label">{it.letter} | {it.label}</span>
               <span className="rubric-sub" style={{ display: "block" }}>{it.sub}</span>
             </span>
           </button>
@@ -358,7 +366,7 @@ function AgentSteps({ steps }) {
       {steps.map((s, i) => (
         <div key={i} className="card" style={{ display: "flex", gap: 16, padding: "16px 20px" }}>
           <div style={{
-            width: 40, height: 40, borderRadius: 10,
+            width: 40, height: 40, borderRadius: 4,
             background: "var(--burgundy)", color: "var(--cream)",
             display: "grid", placeItems: "center",
             fontWeight: 700, fontSize: 16, flexShrink: 0,
@@ -418,19 +426,19 @@ function LlmSim({ user, answer, reveals }) {
       <div className="llm-sim-head">
         <div className="llm-sim-head-left">
           <span className="llm-sim-dot" />
-          <span>Experimento mental · simulación LLM</span>
+          <span>Experimento mental | simulación de un LLM</span>
         </div>
         <div className="llm-sim-meta">Paso {step + 1} / 3</div>
       </div>
 
       <div className="llm-sim-chat">
         <div className="llm-row user">
-          <div className="llm-label">Usuario →</div>
+          <div className="llm-label">Usuario</div>
           <div className="llm-content">{user}</div>
         </div>
         {step >= 1 && (
           <div className="llm-row bot">
-            <div className="llm-label">LLM →</div>
+            <div className="llm-label">LLM</div>
             <div className="llm-content">
               {thinking ? (
                 <span className="llm-typing"><span/><span/><span/></span>
@@ -486,6 +494,8 @@ function renderPart(part, key) {
   switch (part.t) {
     case "p":
       return <p key={key} dangerouslySetInnerHTML={{ __html: md(part.x) }} />;
+    case "src":
+      return <Source key={key} x={part.x} />;
     case "callout":
       return <Callout key={key} kind={part.kind} head={part.head}>{part.x}</Callout>;
     case "bignums":
@@ -528,7 +538,7 @@ function renderPart(part, key) {
 }
 
 Object.assign(window, {
-  CoreChipRow, CopyButton, PromptCore, PromptRaw, Callout, BigNumbers,
+  md, Source, CoreChipRow, CopyButton, PromptCore, PromptRaw, Callout, BigNumbers,
   Compare, Grid2, Grid3, Grid4, Schema, TrapReveal, AforismoMini,
   ExerciseTextarea, Matcher, AgentSteps, Timeline, LlmSim, renderPart,
 });

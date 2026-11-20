@@ -1,0 +1,19 @@
+Copyright (c) 2026 Miguel Ángel Fernández. All rights reserved.
+
+This repository and the course it contains (texts, exercises, quizzes,
+design and code) are the property of the author. No permission is granted
+to copy, modify, distribute, publish or create derivative works from any
+part of it without the author's prior written consent. Viewing the
+published site for personal study is permitted.
+
+Copyright (c) 2026 Miguel Ángel Fernández. Todos los derechos reservados.
+
+Este repositorio y el curso que contiene (textos, ejercicios, quizzes,
+diseño y código) son propiedad del autor. No se autoriza copiar,
+modificar, distribuir, publicar ni crear obras derivadas de ninguna parte
+sin su consentimiento previo y por escrito. Se permite consultar el sitio
+publicado para estudio personal.
+
+Third-party components keep their own licenses: React and ReactDOM
+(vendor/) are distributed under the MIT License, Copyright (c) Meta
+Platforms, Inc. and affiliates.

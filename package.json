@@ -1,0 +1,15 @@
+{
+  "name": "curso-ia",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Curso autoguiado Trabajando con IAG | Copilot (sitio estático para GitHub Pages)",
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  }
+}
