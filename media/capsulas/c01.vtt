@@ -1,0 +1,67 @@
+WEBVTT
+
+00:00:01.000 --> 00:00:02.582
+Si le preguntas a un modelo de
+
+00:00:02.602 --> 00:00:05.171
+lenguaje «¿cuál es el capital de Chile?»,
+
+00:00:05.191 --> 00:00:08.492
+lo más probable es que te responda «Santiago».
+
+00:00:08.512 --> 00:00:10.535
+Pero preguntaste por el capital,
+
+00:00:10.555 --> 00:00:12.114
+no por la capital.
+
+00:00:12.134 --> 00:00:14.146
+Una persona atenta habría pensado en
+
+00:00:14.166 --> 00:00:16.387
+el cobre o en el capital humano.
+
+00:00:16.407 --> 00:00:17.780
+El modelo, en cambio,
+
+00:00:17.800 --> 00:00:20.137
+hizo lo único que sabe hacer:
+
+00:00:20.157 --> 00:00:23.062
+predecir la palabra siguiente más probable,
+
+00:00:23.082 --> 00:00:24.398
+una y otra vez,
+
+00:00:24.418 --> 00:00:26.464
+a partir de todo lo que leyó.
+
+00:00:26.484 --> 00:00:30.017
+Es un autocompletador a escala industrial.
+
+00:00:30.037 --> 00:00:33.453
+No consulta fuentes por sí solo ni verifica nada.
+
+00:00:33.473 --> 00:00:36.971
+Por eso puede inventar una cifra con total seguridad:
+
+00:00:36.991 --> 00:00:39.119
+elige la que suena correcta.
+
+00:00:39.139 --> 00:00:42.021
+Que algo sea plausible no lo hace verdadero.
+
+00:00:42.041 --> 00:00:42.799
+Y por eso,
+
+00:00:42.819 --> 00:00:43.832
+en este curso,
+
+00:00:43.852 --> 00:00:46.050
+la primera regla es darle contexto,
+
+00:00:46.070 --> 00:00:47.153
+y la segunda,
+
+00:00:47.173 --> 00:00:49.744
+revisar siempre lo que te entrega.

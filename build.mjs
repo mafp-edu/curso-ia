@@ -1,4 +1,4 @@
-// Compila app.jsx y components.jsx a dist/app.min.js y copia React de
+// Compila components.jsx, extras.jsx y app.jsx a dist/app.min.js y copia React de
 // producción a vendor/. Uso: npm install (una vez) y luego npm run build.
 import { readFileSync, writeFileSync, mkdirSync, copyFileSync } from "node:fs";
 import { transform } from "esbuild";
@@ -11,6 +11,7 @@ const read = (f) => readFileSync(new URL(f, import.meta.url), "utf8");
 const source = [
   "(() => {",
   read("./components.jsx"),
+  read("./extras.jsx"),
   read("./app.jsx"),
   'ReactDOM.createRoot(document.getElementById("root")).render(<App />);',
   "})();",
