@@ -83,13 +83,13 @@ html, body {
 }
 .brand-mark {
   width: 34px; height: 34px;
-  border-radius: 8px;
+  border-radius: 4px;
   background: var(--burgundy);
   color: var(--cream);
   display: grid; place-items: center;
   font-weight: 700;
   font-size: 14px;
-  letter-spacing: 0.02em;
+
 }
 .brand-text { line-height: 1.15; }
 .brand-title {
@@ -97,14 +97,12 @@ html, body {
   color: var(--ink);
 }
 .brand-sub {
-  font-size: 11px; color: var(--ink-3);
-  text-transform: uppercase; letter-spacing: 0.08em;
+  font-size: 11.5px; color: var(--ink-3);
 }
 
 .header-progress { flex: 1; display: flex; align-items: center; gap: 16px; }
 .header-progress-label {
-  font-size: 11px; color: var(--ink-3);
-  text-transform: uppercase; letter-spacing: 0.08em;
+  font-size: 12px; color: var(--ink-3);
   font-weight: 600;
   white-space: nowrap;
 }
@@ -112,13 +110,13 @@ html, body {
   flex: 1;
   height: 6px;
   background: var(--cream-deep);
-  border-radius: 100px;
+  border-radius: 2px;
   overflow: hidden;
 }
 .progressbar-fill {
   height: 100%;
   background: linear-gradient(90deg, var(--burgundy) 0%, var(--gold) 100%);
-  border-radius: 100px;
+  border-radius: 2px;
   transition: width 0.4s cubic-bezier(.2,.8,.2,1);
 }
 .progress-pct {
@@ -133,7 +131,7 @@ html, body {
   height: 36px; padding: 0 12px;
   background: transparent;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 4px;
   font: inherit;
   font-size: 12.5px; font-weight: 500;
   color: var(--ink-2);
@@ -160,9 +158,9 @@ html, body {
 .app.projector .sidebar { display: none; }
 
 .sidebar-title {
-  font-size: 10.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
+  font-size: 12.5px;
+
+
   color: var(--ink-3);
   font-weight: 600;
   padding: 0 8px 12px;
@@ -172,7 +170,7 @@ html, body {
 .block-head {
   display: flex; align-items: center; gap: 10px;
   padding: 10px 10px;
-  border-radius: 8px;
+  border-radius: 4px;
   cursor: pointer;
   border: none;
   background: transparent;
@@ -221,7 +219,7 @@ html, body {
 .lesson-item {
   display: flex; align-items: center; gap: 8px;
   padding: 6px 10px;
-  border-radius: 6px;
+  border-radius: 3px;
   background: none;
   border: none;
   font: inherit;
@@ -280,9 +278,9 @@ html, body {
   display: flex; align-items: flex-end; justify-content: space-between; gap: 32px;
 }
 .block-eyebrow {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
+  font-size: 13.5px;
+
+
   color: var(--burgundy);
   font-weight: 600;
   margin-bottom: 10px;
@@ -307,7 +305,7 @@ html, body {
   padding: 8px 14px;
   border: 1px solid var(--line);
   background: var(--paper);
-  border-radius: 999px;
+  border-radius: 4px;
   font-size: 12px; font-weight: 500;
   color: var(--ink-2);
   white-space: nowrap;
@@ -318,7 +316,7 @@ html, body {
 .lesson {
   background: white;
   border: 1px solid var(--line-soft);
-  border-radius: 14px;
+  border-radius: 4px;
   padding: 28px 32px;
   margin-bottom: 20px;
   transition: all 0.2s;
@@ -347,9 +345,9 @@ html, body {
 .lesson.done .lesson-index { background: var(--olive); }
 .lesson-titles { flex: 1; min-width: 0; }
 .lesson-eyebrow {
-  font-size: 10.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
+  font-size: 12.5px;
+
+
   color: var(--ink-3);
   font-weight: 600;
   display: flex; align-items: center; gap: 10px;
@@ -368,7 +366,7 @@ html, body {
 .done-check {
   display: inline-flex; align-items: center; gap: 6px;
   height: 32px; padding: 0 12px;
-  border-radius: 999px;
+  border-radius: 4px;
   background: var(--cream);
   border: 1px solid var(--line);
   font-size: 12px; font-weight: 500;
@@ -414,9 +412,9 @@ html, body {
 .big-number.olive { color: var(--olive); }
 .big-number.gold { color: var(--gold); }
 .big-number-label {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  font-size: 13px;
+
+
   color: var(--ink-3);
   font-weight: 600;
   margin-top: 8px;
@@ -446,9 +444,9 @@ html, body {
 .llm-sim-head-left {
   display: flex; align-items: center; gap: 12px;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 12px;
+
+
   font-weight: 600;
 }
 .llm-sim-dot {
@@ -459,10 +457,10 @@ html, body {
 @keyframes llmPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
 .llm-sim-meta {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 10px;
-  letter-spacing: 0.12em;
+  font-size: 11.5px;
+
   opacity: 0.6;
-  text-transform: uppercase;
+
 }
 
 .llm-sim-chat {
@@ -479,9 +477,9 @@ html, body {
   background: var(--cream);
   padding: 18px 16px;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 12px;
+
+
   font-weight: 700;
   color: var(--ink-2);
   border-right: 1px solid var(--cream-deep);
@@ -538,8 +536,8 @@ html, body {
   border-radius: 4px;
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+
+
   cursor: pointer;
   transition: all 0.15s;
   font-family: inherit;
@@ -553,8 +551,8 @@ html, body {
   border-radius: 4px;
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+
+
   cursor: pointer;
   font-family: inherit;
 }
@@ -584,7 +582,7 @@ html, body {
   font-size: 11px;
   font-weight: 700;
   color: var(--burgundy);
-  letter-spacing: 0.08em;
+
   border-right: 1px solid var(--cream-deep);
   display: flex; align-items: flex-start;
 }
@@ -592,9 +590,9 @@ html, body {
   padding: 18px 22px;
 }
 .llm-reveal-head {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+  font-size: 13px;
+
+
   font-weight: 700;
   color: var(--burgundy);
   margin-bottom: 6px;
@@ -610,7 +608,7 @@ html, body {
 .callout {
   border-left: 5px solid;
   padding: 18px 22px;
-  border-radius: 0 10px 10px 0;
+  border-radius: 0 4px 4px 0;
   margin: 16px 0;
 }
 .callout-tip { border-color: var(--gold); background: var(--gold-soft); }
@@ -618,7 +616,7 @@ html, body {
 .callout-ok { border-color: var(--olive); background: var(--olive-soft); }
 .callout-nota { border-color: var(--marine); background: var(--marine-soft); }
 .callout-head {
-  font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+  font-size: 13px;
   font-weight: 700;
   margin-bottom: 6px;
   display: flex; align-items: center; gap: 8px;
@@ -634,7 +632,7 @@ html, body {
 .prompt {
   background: #1A1410;
   color: #F5EFE3;
-  border-radius: 12px;
+  border-radius: 4px;
   padding: 0;
   margin: 14px 0 4px;
   overflow: hidden;
@@ -647,8 +645,7 @@ html, body {
   background: #231A14;
 }
 .prompt-meta {
-  font-size: 11px; color: #B8A58E;
-  text-transform: uppercase; letter-spacing: 0.1em;
+  font-size: 12px; color: #B8A58E;
   font-weight: 600;
   display: flex; align-items: center; gap: 8px;
 }
@@ -657,7 +654,7 @@ html, body {
   border: 1px solid #3A2E22;
   color: #E6D8BC;
   padding: 5px 10px;
-  border-radius: 6px;
+  border-radius: 3px;
   font: inherit;
   font-size: 11px;
   font-weight: 500;
@@ -681,7 +678,7 @@ html, body {
   border-radius: 4px;
   font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: 0.03em;
+
   margin-right: 8px;
   vertical-align: baseline;
   color: white;
@@ -696,9 +693,9 @@ html, body {
 .chip {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 3px 10px;
-  border-radius: 999px;
+  border-radius: 4px;
   font-size: 11.5px; font-weight: 600;
-  letter-spacing: 0.01em;
+
   color: white;
 }
 .chip-c { background: var(--c-contexto); }
@@ -721,7 +718,7 @@ html, body {
 .card {
   background: var(--paper);
   border: 1px solid var(--line-soft);
-  border-radius: 10px;
+  border-radius: 4px;
   padding: 18px;
 }
 .card-title {
@@ -736,7 +733,7 @@ html, body {
 .schema {
   background: var(--paper);
   border: 1px dashed var(--line);
-  border-radius: 12px;
+  border-radius: 4px;
   padding: 24px;
   position: relative;
   margin: 14px 0;
@@ -747,16 +744,16 @@ html, body {
   left: 16px;
   background: var(--paper);
   padding: 0 10px;
-  font-size: 10.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  font-size: 12px;
+
+
   color: var(--ink-3);
   font-weight: 600;
 }
 .schema-window {
   background: white;
   border: 1.5px solid var(--ink-2);
-  border-radius: 8px;
+  border-radius: 4px;
   min-height: 180px;
   position: relative;
   overflow: hidden;
@@ -773,7 +770,7 @@ html, body {
 }
 .schema-box {
   border: 1.5px dashed var(--line);
-  border-radius: 6px;
+  border-radius: 3px;
   padding: 10px 12px;
   background: var(--cream);
   font-size: 12px;
@@ -801,7 +798,7 @@ html, body {
 .quiz {
   background: linear-gradient(180deg, var(--marine-soft) 0%, #F0F5FA 100%);
   border: 1px solid var(--marine);
-  border-radius: 16px;
+  border-radius: 4px;
   padding: 32px 36px;
   margin-top: 28px;
   margin-bottom: 20px;
@@ -812,7 +809,7 @@ html, body {
 }
 .quiz-mark {
   width: 44px; height: 44px;
-  border-radius: 12px;
+  border-radius: 4px;
   background: var(--marine);
   color: white;
   display: grid; place-items: center;
@@ -827,7 +824,7 @@ html, body {
 .quiz-retry {
   background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 8px 14px;
   font: inherit; font-size: 12.5px; font-weight: 600;
   color: var(--ink-2);
@@ -845,7 +842,7 @@ html, body {
   flex: 1;
   background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 4px;
   padding: 18px 22px;
   cursor: pointer;
   font: inherit;
@@ -881,7 +878,7 @@ html, body {
   background: white;
   border: 1.5px solid var(--line);
   padding: 12px 16px;
-  border-radius: 10px;
+  border-radius: 4px;
   font: inherit;
   font-size: 14.5px;
   color: var(--ink);
@@ -892,7 +889,7 @@ html, body {
 .q-option:hover { border-color: var(--marine); background: #F9FBFD; }
 .q-option .q-letter {
   width: 24px; height: 24px;
-  border-radius: 6px;
+  border-radius: 3px;
   background: var(--cream);
   color: var(--ink-2);
   display: grid; place-items: center;
@@ -910,7 +907,7 @@ html, body {
 .q-feedback {
   margin-top: 10px;
   padding: 12px 14px;
-  border-radius: 8px;
+  border-radius: 4px;
   font-size: 13.5px;
   line-height: 1.5;
   border-left: 3px solid;
@@ -932,13 +929,13 @@ html, body {
 
 .para-llevar {
   background: var(--cream);
-  border-radius: 12px;
+  border-radius: 4px;
   padding: 24px 26px;
 }
 .wrap-eyebrow {
-  font-size: 10.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+  font-size: 13px;
+
+
   color: var(--burgundy);
   font-weight: 700;
   margin-bottom: 12px;
@@ -971,7 +968,7 @@ html, body {
 .cliffhanger {
   background: var(--marine);
   color: var(--cream);
-  border-radius: 12px;
+  border-radius: 4px;
   padding: 24px 26px;
   display: flex; flex-direction: column; justify-content: center;
 }
@@ -989,7 +986,7 @@ html, body {
   padding: 36px 40px;
   background: var(--burgundy);
   color: var(--cream);
-  border-radius: 12px;
+  border-radius: 4px;
   font-size: 30px;
   font-style: italic;
   font-weight: 500;
@@ -1011,11 +1008,11 @@ html, body {
 .aforismo-attr {
   display: block;
   margin-top: 14px;
-  font-size: 11px;
+  font-size: 12.5px;
   font-style: normal;
   font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+
+
   color: var(--gold-soft);
 }
 
@@ -1023,7 +1020,7 @@ html, body {
 .exercise {
   background: var(--paper);
   border: 2px solid var(--burgundy);
-  border-radius: 14px;
+  border-radius: 4px;
   padding: 24px 28px;
   margin: 18px 0;
 }
@@ -1032,8 +1029,8 @@ html, body {
   margin-bottom: 14px;
 }
 .exercise-tag {
-  font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 12px; font-weight: 700;
+
   background: var(--burgundy); color: var(--cream);
   padding: 3px 9px; border-radius: 4px;
 }
@@ -1042,7 +1039,7 @@ html, body {
   width: 100%;
   min-height: 120px;
   border: 1.5px solid var(--line);
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 12px 14px;
   font: inherit;
   font-size: 14px;
@@ -1069,7 +1066,7 @@ html, body {
 .rubric-item {
   background: white;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 10px 12px;
   cursor: pointer;
   font-size: 12.5px;
@@ -1106,13 +1103,12 @@ html, body {
 @media (max-width: 820px) { .compare { grid-template-columns: 1fr; } }
 .compare-col {
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 4px;
   overflow: hidden;
 }
 .compare-col-head {
   padding: 12px 16px;
-  font-size: 11.5px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.1em;
+  font-size: 13.5px; font-weight: 700;
   display: flex; align-items: center; justify-content: space-between;
 }
 .compare-col.bad .compare-col-head { background: var(--terracotta-soft); color: #6E2614; }
@@ -1147,8 +1143,7 @@ html, body {
   box-shadow: 0 0 0 2px var(--burgundy);
 }
 .tl-when {
-  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--burgundy);
+  font-size: 12.5px; font-weight: 700; color: var(--burgundy);
   margin-bottom: 4px;
 }
 .tl-what { font-size: 15px; font-weight: 600; color: var(--ink); line-height: 1.3; }
@@ -1160,14 +1155,13 @@ html, body {
   padding: 56px 40px;
   background: linear-gradient(180deg, var(--burgundy) 0%, var(--burgundy-dark) 100%);
   color: var(--cream);
-  border-radius: 20px;
+  border-radius: 4px;
   margin: 40px 0;
   position: relative;
   overflow: hidden;
 }
 .celebration-eyebrow {
-  font-size: 11px; letter-spacing: 0.16em;
-  text-transform: uppercase; font-weight: 700;
+  font-size: 13px; font-weight: 700;
   color: var(--gold);
   margin-bottom: 14px;
 }
@@ -1193,8 +1187,7 @@ html, body {
   line-height: 1;
 }
 .celebration-stat .l {
-  font-size: 11px; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--cream-deep);
+  font-size: 12.5px; color: var(--cream-deep);
   font-weight: 600; margin-top: 4px;
 }
 .celebration-quote {
@@ -1212,7 +1205,7 @@ html, body {
   width: 300px;
   background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 4px;
   box-shadow: 0 12px 36px rgba(26, 20, 16, 0.15);
   padding: 18px 20px;
   z-index: 100;
@@ -1223,8 +1216,8 @@ html, body {
   margin-bottom: 14px;
 }
 .tweaks-title {
-  font-size: 11px; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: 13px; font-weight: 700;
+
   color: var(--burgundy);
 }
 .tweaks-close {
@@ -1242,7 +1235,7 @@ html, body {
   padding: 5px 10px;
   border: 1px solid var(--line);
   background: white;
-  border-radius: 999px;
+  border-radius: 4px;
   font: inherit;
   font-size: 11.5px;
   color: var(--ink-2);

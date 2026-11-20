@@ -274,7 +274,7 @@ function AforismoMini({ x }) {
       fontWeight: 500,
       lineHeight: 1.4,
       color: "var(--ink)",
-      borderRadius: "0 10px 10px 0",
+      borderRadius: "0 4px 4px 0",
     }}>
       {x}
     </div>
@@ -366,7 +366,7 @@ function AgentSteps({ steps }) {
       {steps.map((s, i) => (
         <div key={i} className="card" style={{ display: "flex", gap: 16, padding: "16px 20px" }}>
           <div style={{
-            width: 40, height: 40, borderRadius: 10,
+            width: 40, height: 40, borderRadius: 4,
             background: "var(--burgundy)", color: "var(--cream)",
             display: "grid", placeItems: "center",
             fontWeight: 700, fontSize: 16, flexShrink: 0,
