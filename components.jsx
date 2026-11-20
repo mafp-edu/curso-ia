@@ -85,7 +85,7 @@ function PromptRaw({ text }) {
   return (
     <div className="prompt">
       <div className="prompt-head">
-        <span className="prompt-meta" style={{ color: "#E8A78E" }}>⚠ Prompt SIN anonimizar (ejemplo)</span>
+        <span className="prompt-meta" style={{ color: "#E8A78E" }}>⚠ Prompt sin anonimizar (ejemplo)</span>
         <CopyButton text={text} />
       </div>
       <div className="prompt-body" style={{ color: "#F1D9CC" }}>{text}</div>
@@ -107,7 +107,7 @@ function BigNumbers({ items }) {
     <div className="grid-3" style={{ margin: "8px 0 16px" }}>
       {items.map((it, i) => (
         <div key={i}>
-          <div className={`big-number ${it.c || ""}`} style={it.fs ? { fontSize: `${it.fs}px` } : undefined}>{it.n}</div>
+          <div className={`big-number ${it.c || ""}`} style={it.fs ? { "--bn-fs": `${it.fs}px` } : undefined}>{it.n}</div>
           <div className="big-number-label">{it.l}</div>
           {it.sub && <div className="big-number-sub">{it.sub}</div>}
         </div>
@@ -287,7 +287,8 @@ function ExerciseTextarea() {
   return (
     <>
       <textarea
-        placeholder="[C] Soy analista de...&#10;[O] Necesito un...&#10;[R] No inventes...&#10;[E] Formato: ..."
+        placeholder={"[C] Soy analista de...\n[O] Necesito un...\n[R] No inventes...\n[E] Formato: ..."}
+        aria-label="Escribe tu prompt CORE"
         value={value}
         onChange={e => setValue(e.target.value)}
       />
@@ -295,7 +296,7 @@ function ExerciseTextarea() {
         {[
           { k: "c", letter: "C", label: "Contexto claro", sub: "Rol, empresa" },
           { k: "o", letter: "O", label: "Objetivo específico", sub: "Entregable concreto" },
-          { k: "r", letter: "R", label: "Restricciones", sub: "Largo, qué NO" },
+          { k: "r", letter: "R", label: "Restricciones", sub: "Largo, qué evitar" },
           { k: "e", letter: "E", label: "Expectativas", sub: "Formato, tono" },
         ].map(it => (
           <button
@@ -305,7 +306,7 @@ function ExerciseTextarea() {
           >
             <span className="rubric-check">{rubric[it.k] ? "✓" : ""}</span>
             <span>
-              <span className="rubric-label">{it.letter} · {it.label}</span>
+              <span className="rubric-label">{it.letter} | {it.label}</span>
               <span className="rubric-sub" style={{ display: "block" }}>{it.sub}</span>
             </span>
           </button>
@@ -425,19 +426,19 @@ function LlmSim({ user, answer, reveals }) {
       <div className="llm-sim-head">
         <div className="llm-sim-head-left">
           <span className="llm-sim-dot" />
-          <span>Experimento mental · simulación LLM</span>
+          <span>Experimento mental | simulación de un LLM</span>
         </div>
         <div className="llm-sim-meta">Paso {step + 1} / 3</div>
       </div>
 
       <div className="llm-sim-chat">
         <div className="llm-row user">
-          <div className="llm-label">Usuario →</div>
+          <div className="llm-label">Usuario</div>
           <div className="llm-content">{user}</div>
         </div>
         {step >= 1 && (
           <div className="llm-row bot">
-            <div className="llm-label">LLM →</div>
+            <div className="llm-label">LLM</div>
             <div className="llm-content">
               {thinking ? (
                 <span className="llm-typing"><span/><span/><span/></span>

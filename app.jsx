@@ -26,36 +26,15 @@ function Quiz({ quiz, onComplete }) {
         <div className="quiz-mark">?</div>
         <div>
           <div className="quiz-title">{quiz.title}</div>
-          <div className="quiz-sub">Feedback inmediato · autocorrección</div>
+          <div className="quiz-sub">Corrección inmediata</div>
         </div>
         {allAnswered && (
-          <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 16 }}>
+          <div className="quiz-score">
             <div style={{ textAlign: "right" }}>
-              <div style={{ fontSize: 28, fontWeight: 700, color: "var(--marine)", letterSpacing: "-0.02em", fontVariantNumeric: "tabular-nums" }}>
-                {correctCount}/{quiz.questions.length}
-              </div>
-              <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--ink-3)", fontWeight: 600 }}>
-                Puntaje
-              </div>
+              <div className="quiz-score-n">{correctCount}/{quiz.questions.length}</div>
+              <div className="quiz-score-l">Puntaje</div>
             </div>
-            <button
-              onClick={resetQuiz}
-              style={{
-                background: "var(--paper)",
-                border: "1px solid var(--line)",
-                borderRadius: 8,
-                padding: "8px 14px",
-                fontSize: 12,
-                fontWeight: 600,
-                textTransform: "uppercase",
-                letterSpacing: "0.08em",
-                color: "var(--ink-2)",
-                cursor: "pointer",
-                font: "inherit",
-                fontSize: 12,
-              }}
-              title="Borrar respuestas y volver a intentarlo"
-            >
+            <button className="quiz-retry" onClick={resetQuiz} title="Borrar respuestas y volver a intentarlo">
               ↺ Reintentar
             </button>
           </div>
@@ -108,8 +87,10 @@ function Lesson({ lesson, idx, isDone, onToggle }) {
         <div className="lesson-titles">
           <div className="lesson-eyebrow">
             <span>{lesson.code}</span>
-            <span className="dur">· {lesson.dur}</span>
-            <span>· {lesson.eyebrow}</span>
+            <span className="sep">|</span>
+            <span className="dur">{lesson.dur}</span>
+            <span className="sep">|</span>
+            <span>{lesson.eyebrow}</span>
           </div>
           <h3 className="lesson-title">{lesson.title}</h3>
         </div>
@@ -135,18 +116,18 @@ function WrapUp({ block }) {
       </div>
       {block.cliffhanger ? (
         <div className="cliffhanger">
-          <div className="wrap-eyebrow">Lección</div>
+          <div className="wrap-eyebrow">Lo que viene</div>
           <p>{block.cliffhanger}</p>
         </div>
       ) : (
         <div className="cliffhanger" style={{ background: "var(--olive)" }}>
           <div className="wrap-eyebrow" style={{ color: "#E4EAD6" }}>Fin del curso</div>
-          <p>Has llegado al cierre. Lo que sigue: poner en práctica lo aprendido.</p>
+          <p>Llegaste al cierre. Ahora toca aplicarlo en tu trabajo.</p>
         </div>
       )}
       <div className="aforismo">
         {block.aforismo}
-        <span className="aforismo-attr">Cierre Bloque {String(block.num).padStart(2, "0")}</span>
+        <span className="aforismo-attr">Cierre del bloque {String(block.num).padStart(2, "0")}</span>
       </div>
     </div>
   );
@@ -157,14 +138,14 @@ function Celebration({ onPrint, onReset, stats }) {
     <div className="celebration">
       <div className="celebration-eyebrow">Curso completado</div>
       <h2>Felicitaciones.</h2>
-      <p>Terminaste los 5 bloques del curso Copilot Chat Básico. Ya tienes la base para empezar a usarlo con criterio el lunes por la mañana.</p>
+      <p>Terminaste los {stats.blocks} bloques del curso. Ya tienes la base para usar la IA generativa con criterio en tu trabajo.</p>
       <div className="celebration-stats">
         <div className="celebration-stat">
           <div className="n">{stats.lessons}</div>
           <div className="l">Lecciones</div>
         </div>
         <div className="celebration-stat">
-          <div className="n">{stats.quizzes}/4</div>
+          <div className="n">{stats.quizzes}/{stats.blocks}</div>
           <div className="l">Quizzes</div>
         </div>
         <div className="celebration-stat">
@@ -173,19 +154,19 @@ function Celebration({ onPrint, onReset, stats }) {
         </div>
       </div>
       <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
-        <button className="icon-btn" onClick={onPrint} style={{ background: "var(--cream)", color: "var(--burgundy)", borderColor: "var(--cream)", height: 42, padding: "0 20px", fontSize: 13.5, fontWeight: 600 }}>
-          ⎙ Imprimir mi progreso
+        <button className="icon-btn" onClick={onPrint} style={{ background: "var(--cream)", color: "var(--burgundy)", borderColor: "var(--cream)", height: 42, padding: "0 20px", fontSize: 13.5, fontWeight: 600 }} title="Imprime el bloque que estás viendo">
+          ⎙ Imprimir este bloque
         </button>
         <button className="icon-btn" onClick={onReset} style={{ background: "transparent", color: "var(--cream)", borderColor: "var(--gold)", height: 42, padding: "0 20px", fontSize: 13.5 }}>
           ↻ Reiniciar curso
         </button>
       </div>
-      <div className="celebration-quote">“Copilot no reemplaza al profesional que piensa.”</div>
+      <div className="celebration-quote">«La IA rinde más en manos de quien piensa con criterio.»</div>
     </div>
   );
 }
 
-function BlockView({ block, completed, toggleLesson, quizCompleted, onQuizDone, showCelebration, celebrationProps }) {
+function BlockView({ block, completed, toggleLesson, quizCompleted, onQuizDone, showCelebration, celebrationProps, nav }) {
   return (
     <div className="main">
       <div className="block-header">
@@ -208,14 +189,15 @@ function BlockView({ block, completed, toggleLesson, quizCompleted, onQuizDone, 
       <Quiz key={block.id} quiz={block.quiz} onComplete={onQuizDone} />
       <WrapUp block={block} />
       {showCelebration && <Celebration {...celebrationProps} />}
+      {nav}
     </div>
   );
 }
 
-function Sidebar({ blocks, activeBlock, setActiveBlock, activeLesson, setActiveLesson, completed, quizCompleted }) {
+function Sidebar({ blocks, activeBlock, setActiveBlock, activeLesson, setActiveLesson, completed, quizCompleted, totalMin }) {
   return (
-    <aside className="sidebar">
-      <div className="sidebar-title">Programa · 120 min</div>
+    <aside className="sidebar" aria-label="Programa del curso">
+      <div className="sidebar-title">Programa | {totalMin} min</div>
       {blocks.map(b => {
         const doneCount = b.lessons.filter(l => completed[l.id]).length;
         const total = b.lessons.length;
@@ -232,7 +214,7 @@ function Sidebar({ blocks, activeBlock, setActiveBlock, activeLesson, setActiveL
               <div className={numClass}>{allDone ? "✓" : b.num}</div>
               <div className="block-head-text">
                 <div className="block-head-title">{b.title}</div>
-                <div className="block-head-meta">{doneCount}/{total} lecciones{quizCompleted[b.id] ? " · quiz ✓" : ""}</div>
+                <div className="block-head-meta">{doneCount}/{total} lecciones{quizCompleted[b.id] ? " | quiz ✓" : ""}</div>
               </div>
             </button>
             {isActive && (
@@ -269,8 +251,8 @@ function Header({ pct, projector, setProjector, onPrint, onTweaks, tweaksOpen, m
       <div className="brand">
         <div className="brand-mark">C</div>
         <div className="brand-text">
-          <div className="brand-title">Trabajando con IAG - Copilot</div>
-          <div className="brand-sub">MIGUEL ÁNGEL FERNÁNDEZ, PHD.</div>
+          <div className="brand-title">Trabajando con IAG | Copilot</div>
+          <div className="brand-sub">Miguel Ángel Fernández, Ph.D.</div>
         </div>
       </div>
       <div className="header-progress">
@@ -281,11 +263,11 @@ function Header({ pct, projector, setProjector, onPrint, onTweaks, tweaksOpen, m
         <span className="progress-pct">{pct}%</span>
       </div>
       <div className="header-actions">
-        <button className={`icon-btn ${projector ? "active" : ""}`} onClick={() => setProjector(!projector)}>
+        <button className={`icon-btn btn-projector ${projector ? "active" : ""}`} onClick={() => setProjector(!projector)}>
           ▣ Proyector
         </button>
         <button className="icon-btn" onClick={onPrint}>⎙ Imprimir</button>
-        <button className={`icon-btn ${tweaksOpen ? "active" : ""}`} onClick={onTweaks}>⚙ Tweaks</button>
+        <button className={`icon-btn ${tweaksOpen ? "active" : ""}`} onClick={onTweaks}>⚙ Ajustes</button>
       </div>
     </header>
   );
@@ -295,15 +277,15 @@ function TweaksPanel({ config, setConfig, onClose }) {
   return (
     <div className="tweaks">
       <div className="tweaks-head">
-        <div className="tweaks-title">Tweaks</div>
+        <div className="tweaks-title">Ajustes de visualización</div>
         <button className="tweaks-close" onClick={onClose} aria-label="Cerrar">✕</button>
       </div>
       <div className="tweak-row">
         <label className="tweak-label">Paleta</label>
         <div className="tweak-pills">
           {[
-            { k: "default", l: "Burgundy" },
-            { k: "marine", l: "Marine" },
+            { k: "default", l: "Burdeo" },
+            { k: "marine", l: "Marino" },
             { k: "olive", l: "Olivo" },
           ].map(p => (
             <button
@@ -437,14 +419,16 @@ function App() {
   const isLastBlock = activeBlock.id === data.blocks[data.blocks.length - 1].id;
   const allDone = pct === 100;
 
+  const totalMin = data.blocks.reduce((acc, b) => acc + blockMinutes(b), 0);
   const celebrationStats = {
     lessons: Object.values(completed).filter(Boolean).length,
     quizzes: Object.values(quizCompleted).filter(Boolean).length,
-    min: data.meta.duracionMin,
+    blocks: data.blocks.length,
+    min: totalMin,
   };
 
   return (
-    <div className={appClass} data-screen-label={`Bloque ${activeBlock.num} · ${activeBlock.title}`}>
+    <div className={appClass} data-screen-label={`Bloque ${activeBlock.num} | ${activeBlock.title}`}>
       <Header
         pct={pct}
         projector={projector}
@@ -462,6 +446,7 @@ function App() {
         setActiveLesson={setActiveLessonId}
         completed={completed}
         quizCompleted={quizCompleted}
+        totalMin={totalMin}
       />
       <BlockView
         block={activeBlock}
@@ -471,11 +456,8 @@ function App() {
         onQuizDone={onQuizDone}
         showCelebration={isLastBlock && allDone}
         celebrationProps={{ onPrint, onReset, stats: celebrationStats }}
+        nav={<BlockNav data={data} activeBlockId={activeBlockId} setActiveBlockId={setActiveBlockId} />}
       />
-      {/* Block navigation at bottom — always visible, even without quiz */}
-      <div className="main" style={{ paddingTop: 0, paddingBottom: 48 }}>
-        <BlockNav data={data} activeBlockId={activeBlockId} setActiveBlockId={setActiveBlockId} />
-      </div>
       {tweaksOpen && <TweaksPanel config={config} setConfig={setConfig} onClose={() => setTweaksOpen(false)} />}
     </div>
   );
@@ -486,53 +468,29 @@ function BlockNav({ data, activeBlockId, setActiveBlockId }) {
   const prev = data.blocks[idx - 1];
   const next = data.blocks[idx + 1];
   if (!prev && !next) return null;
+  const go = (id) => { setActiveBlockId(id); window.scrollTo({ top: 0, behavior: "smooth" }); };
   return (
-    <div style={{
-      display: "flex",
-      gap: 14,
-      marginTop: 32,
-      paddingTop: 28,
-      borderTop: "1px solid var(--line)",
-    }}>
+    <nav className="block-nav" aria-label="Navegación entre bloques">
       {prev && (
-        <button
-          onClick={() => { setActiveBlockId(prev.id); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-          style={{
-            flex: 1,
-            textAlign: "left",
-            background: "var(--paper)",
-            border: "1px solid var(--line)",
-            borderRadius: 12,
-            padding: "18px 22px",
-            cursor: "pointer",
-            font: "inherit",
-          }}
-        >
-          <div style={{ fontSize: 10.5, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--ink-3)", fontWeight: 600, marginBottom: 4 }}>← Anterior</div>
-          <div style={{ fontSize: 15, fontWeight: 600, color: "var(--ink)" }}>{prev.num}. {prev.title}</div>
+        <button className="block-nav-btn prev" onClick={() => go(prev.id)}>
+          <div className="block-nav-label">← Anterior</div>
+          <div className="block-nav-title">{prev.num}. {prev.title}</div>
         </button>
       )}
       {next && (
-        <button
-          onClick={() => { setActiveBlockId(next.id); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-          style={{
-            flex: 1,
-            textAlign: "right",
-            background: "var(--burgundy)",
-            border: "1px solid var(--burgundy)",
-            color: "var(--cream)",
-            borderRadius: 12,
-            padding: "18px 22px",
-            cursor: "pointer",
-            font: "inherit",
-          }}
-        >
-          <div style={{ fontSize: 10.5, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--gold-soft)", fontWeight: 600, marginBottom: 4 }}>Siguiente →</div>
-          <div style={{ fontSize: 15, fontWeight: 600 }}>{next.num}. {next.title}</div>
+        <button className="block-nav-btn next" onClick={() => go(next.id)}>
+          <div className="block-nav-label">Siguiente →</div>
+          <div className="block-nav-title">{next.num}. {next.title}</div>
         </button>
       )}
-    </div>
+    </nav>
   );
+}
+
+// Minutos del bloque, leídos del rótulo («Bloque 02 | 30 min»).
+function blockMinutes(b) {
+  const m = String(b.eyebrow || "").match(/(\d+)\s*min/);
+  return m ? parseInt(m[1], 10) : 0;
 }
 
 Object.assign(window, { App });
