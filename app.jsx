@@ -5,7 +5,7 @@ const { useState: useStateA, useMemo: useMemoA, useEffect: useEffectA } = React;
 // Avance guardado en el navegador (localStorage). Si el navegador no lo
 // permite (modo privado estricto, almacenamiento lleno), el sitio sigue
 // funcionando y simplemente no guarda.
-const STORAGE_KEY = "curso-ia:v1";
+const STORAGE_KEY = "curso-ia:v3"; // v3 (20-nov-2026): 9 bloques en tres partes; el avance de versiones anteriores no se traspasa
 
 function loadSaved() {
   try {
@@ -101,8 +101,9 @@ function Quiz({ quiz, answers, setAnswers, onComplete }) {
   );
 }
 
-function Lesson({ lesson, idx, isDone, onToggle }) {
+function Lesson({ lesson, idx, isDone, onToggle, nav, onSeen }) {
   const isExercise = lesson.kind === "exercise";
+  const cap = capsulaDeLeccion(lesson.id);
   return (
     <div className={`lesson ${isDone ? "done" : ""} ${isExercise ? "exercise-wrap" : ""}`} id={`lesson-${lesson.id}`}>
       <div className="lesson-head">
@@ -122,6 +123,7 @@ function Lesson({ lesson, idx, isDone, onToggle }) {
         </button>
       </div>
       <div className="lesson-body">
+        {cap && <CapsulePlayer cap={cap} nav={nav} onSeen={onSeen} compact />}
         {lesson.body.map((part, i) => renderPart(part, i))}
       </div>
     </div>
@@ -150,7 +152,7 @@ function WrapUp({ block }) {
       )}
       <div className="aforismo">
         {block.aforismo}
-        <span className="aforismo-attr">Cierre del bloque {String(block.num).padStart(2, "0")}</span>
+        <span className="aforismo-attr">Cierre del bloque {block.num}</span>
       </div>
     </div>
   );
@@ -189,11 +191,12 @@ function Celebration({ onPrint, onReset, stats }) {
   );
 }
 
-function BlockView({ block, completed, toggleLesson, quizAnswers, setQuizAnswers, onQuizDone, showCelebration, celebrationProps, nav }) {
+function BlockView({ block, completed, toggleLesson, quizAnswers, setQuizAnswers, onQuizDone, showCelebration, celebrationProps, nav, go, onSeen }) {
   return (
     <div className="main">
-      <div className="block-header">
+      <div className={`block-header part-${block.parte || "general"}`}>
         <div>
+          <div className="block-part">{({ general: "Parte I · IA generativa", copilot: "Parte II · Copilot", claude: "Parte III · Claude" })[block.parte] || ""}</div>
           <div className="block-eyebrow">{block.eyebrow}</div>
           <h2 className="block-title">{block.title}</h2>
           <p className="block-lede">{block.lede}</p>
@@ -207,6 +210,8 @@ function BlockView({ block, completed, toggleLesson, quizAnswers, setQuizAnswers
           idx={i}
           isDone={!!completed[lesson.id]}
           onToggle={() => toggleLesson(lesson.id)}
+          nav={go}
+          onSeen={onSeen}
         />
       ))}
       <Quiz key={block.id} quiz={block.quiz} answers={quizAnswers} setAnswers={setQuizAnswers} onComplete={onQuizDone} />
@@ -217,23 +222,51 @@ function BlockView({ block, completed, toggleLesson, quizAnswers, setQuizAnswers
   );
 }
 
-function Sidebar({ blocks, activeBlock, setActiveBlock, activeLesson, setActiveLesson, completed, quizCompleted, totalMin }) {
+function Sidebar({ blocks, activeBlock, setActiveBlock, activeLesson, setActiveLesson, completed, quizCompleted, totalMin, view, go, sprintsDone, activeSprint }) {
+  const sprints = (window.COURSE_DATA.aplica || { sprints: [] }).sprints;
+  const nCaps = (window.COURSE_DATA.capsulas || []).filter(c => c.estado === "lista").length;
   return (
     <aside className="sidebar" aria-label="Programa del curso">
+      <div className="side-nav">
+        <button className={`side-link ${view === "inicio" ? "active" : ""}`} onClick={go.goHome}><span className="side-ico">⌂</span><span>Inicio</span></button>
+        <button className={`side-link ${view === "capsulas" ? "active" : ""}`} onClick={go.goCapsulas}><span className="side-ico">▶</span><span>Cápsulas de 1 minuto</span><span className="side-count">{nCaps}</span></button>
+        <button className={`side-link ${view === "aplica" ? "active" : ""}`} onClick={go.goAplica}><span className="side-ico">⏱</span><span>Aplica en 10 minutos</span><span className="side-count">{sprints.filter(s => sprintsDone[s.id]).length}/{sprints.length}</span></button>
+        {view === "aplica" && (
+          <div className="lesson-list">
+            {sprints.map(s => (
+              <button key={s.id} className={`lesson-item ${sprintsDone[s.id] ? "done" : ""} ${activeSprint === s.id ? "active" : ""}`} onClick={() => go.goSprint(s.id)}>
+                <span className="lesson-dot" />
+                <span className="lesson-code">{s.num}</span>
+                <span className="lesson-label">{s.titulo}</span>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
       <div className="sidebar-title">Programa | {totalMin} min</div>
-      {blocks.map(b => {
+      {blocks.map((b, bi) => {
+        const partes = window.COURSE_DATA.partes || [];
+        const parte = partes.find(p => p.k === b.parte);
+        const newPart = parte && (bi === 0 || blocks[bi - 1].parte !== b.parte);
         const doneCount = b.lessons.filter(l => completed[l.id]).length;
         const total = b.lessons.length;
         const allLessons = doneCount === total;
         const allDone = allLessons && quizCompleted[b.id];
         const inProgress = doneCount > 0 && !allDone;
-        const isActive = activeBlock === b.id;
+        const isActive = view === "bloque" && activeBlock === b.id;
         let numClass = "block-num";
         if (allDone) numClass += " complete";
         else if (inProgress) numClass += " in-progress";
         return (
-          <div key={b.id} className="block-item">
-            <button className={`block-head ${isActive ? "active" : ""}`} onClick={() => { setActiveBlock(b.id); setActiveLesson(null); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
+          <React.Fragment key={b.id}>
+          {newPart && (
+            <div className={`part-head part-${b.parte}`}>
+              <span className="part-n">Parte {["I", "II", "III", "IV"][partes.indexOf(parte)]}</span>
+              <span className="part-t">{parte.titulo}</span>
+            </div>
+          )}
+          <div className="block-item">
+            <button className={`block-head ${isActive ? "active" : ""}`} onClick={() => go.goBlock(b.id)}>
               <div className={numClass}>{allDone ? "✓" : b.num}</div>
               <div className="block-head-text">
                 <div className="block-head-title">{b.title}</div>
@@ -262,22 +295,28 @@ function Sidebar({ blocks, activeBlock, setActiveBlock, activeLesson, setActiveL
               </div>
             )}
           </div>
+          </React.Fragment>
         );
       })}
     </aside>
   );
 }
 
-function Header({ pct, projector, setProjector, onPrint, onTweaks, tweaksOpen, meta }) {
+function Header({ pct, projector, setProjector, onPrint, onTweaks, tweaksOpen, meta, view, go }) {
   return (
     <header className="header">
       <div className="brand">
-        <div className="brand-mark">C</div>
+        <button className="brand-mark" onClick={go.goHome} title="Inicio del curso">IAG</button>
         <div className="brand-text">
-          <div className="brand-title">Trabajando con IAG | Copilot</div>
+          <div className="brand-title">Trabajando con IAG | Copilot y Claude</div>
           <div className="brand-sub">Miguel Ángel Fernández, Ph.D.</div>
         </div>
       </div>
+      <nav className="top-nav" aria-label="Secciones del curso">
+        {[["inicio", "Inicio", go.goHome], ["capsulas", "Cápsulas", go.goCapsulas], ["bloque", "Bloques", () => go.goBlock()], ["aplica", "Aplica en 10 min", go.goAplica]].map(([k, l, fn]) => (
+          <button key={k} className={`top-link ${view === k ? "active" : ""}`} onClick={fn} aria-current={view === k ? "page" : undefined}>{l}</button>
+        ))}
+      </nav>
       <div className="header-progress">
         <span className="header-progress-label">Progreso</span>
         <div className="progressbar-wrap">
@@ -364,6 +403,12 @@ function App() {
   const [completed, setCompleted] = useStateA(() => saved.completed || {});
   const [quizCompleted, setQuizCompleted] = useStateA(() => saved.quizCompleted || {});
   const [quizAnswers, setQuizAnswers] = useStateA(() => saved.quizAnswers || {});
+  const [view, setView] = useStateA(() => ["inicio", "capsulas", "aplica", "bloque"].includes(saved.view) ? saved.view : "inicio");
+  const [activeSprintId, setActiveSprintId] = useStateA(() => saved.activeSprintId || null);
+  const [sprintsDone, setSprintsDone] = useStateA(() => saved.sprintsDone || {});
+  const [sprintChecks, setSprintChecks] = useStateA(() => saved.sprintChecks || {});
+  const [capsSeen, setCapsSeen] = useStateA(() => saved.capsSeen || {});
+  const [scrollTarget, setScrollTarget] = useStateA(null);
   const [projector, setProjector] = useStateA(false);
   const [tweaksOpen, setTweaksOpen] = useStateA(false);
 
@@ -376,8 +421,36 @@ function App() {
 
   // Guarda el avance y los ajustes en el navegador en cada cambio.
   useEffectA(() => {
-    saveState({ activeBlockId, completed, quizCompleted, quizAnswers, config });
-  }, [activeBlockId, completed, quizCompleted, quizAnswers, config]);
+    saveState({ activeBlockId, completed, quizCompleted, quizAnswers, config, view, activeSprintId, sprintsDone, sprintChecks, capsSeen });
+  }, [activeBlockId, completed, quizCompleted, quizAnswers, config, view, activeSprintId, sprintsDone, sprintChecks, capsSeen]);
+
+  // Navegación entre vistas (Inicio, Cápsulas, Bloques, Aplica).
+  const toTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  const go = {
+    goHome: () => { setView("inicio"); toTop(); },
+    goCapsulas: () => { setView("capsulas"); toTop(); },
+    goAplica: () => { setView("aplica"); setActiveSprintId(null); toTop(); },
+    goSprint: (id) => { setView("aplica"); setActiveSprintId(id); toTop(); },
+    goBlock: (bid, lid) => {
+      setView("bloque");
+      if (bid) setActiveBlockId(bid);
+      setActiveLessonId(lid || null);
+      if (lid) setScrollTarget(`lesson-${lid}`);
+      else toTop();
+    },
+  };
+  // Desplaza hasta la lección pedida una vez que la vista del bloque ya se dibujó.
+  useEffectA(() => {
+    if (!scrollTarget) return;
+    const id = setTimeout(() => {
+      const el = document.getElementById(scrollTarget);
+      if (el && el.scrollIntoView) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      setScrollTarget(null);
+    }, 120);
+    return () => clearTimeout(id);
+  }, [scrollTarget, view, activeBlockId]);
+  const markSeen = (id) => { if (!capsSeen[id]) setCapsSeen(c => ({ ...c, [id]: true })); };
+  const activeSprint = view === "aplica" && activeSprintId ? sprintPorId(activeSprintId) : null;
 
   // Tweaks edit-mode protocol
   useEffectA(() => {
@@ -423,16 +496,20 @@ function App() {
     setCompleted({});
     setQuizCompleted({});
     setQuizAnswers({});
+    setSprintsDone({});
+    setSprintChecks({});
+    setCapsSeen({});
     setActiveBlockId(data.blocks[0].id);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   const onResetAsk = () => {
-    if (window.confirm("¿Borrar el avance guardado en este navegador? Se desmarcarán las lecciones y se borrarán las respuestas de los quizzes.")) onReset();
+    if (window.confirm("¿Borrar el avance guardado en este navegador? Se desmarcarán las lecciones, los ejercicios y las cápsulas vistas, y se borrarán las respuestas de los quizzes.")) onReset();
   };
   const setBlockAnswers = (ans) => setQuizAnswers(q => ({ ...q, [activeBlockId]: ans }));
 
   const appClass = [
     "app",
+    `view-${view}`,
     projector ? "projector" : "",
     config.palette === "marine" ? "palette-marine" : "",
     config.palette === "olive" ? "palette-olive" : "",
@@ -453,7 +530,7 @@ function App() {
   };
 
   return (
-    <div className={appClass} data-screen-label={`Bloque ${activeBlock.num} | ${activeBlock.title}`}>
+    <div className={appClass} data-screen-label={view === "bloque" ? `Bloque ${activeBlock.num} | ${activeBlock.title}` : view}>
       <Header
         pct={pct}
         projector={projector}
@@ -462,6 +539,8 @@ function App() {
         onTweaks={() => setTweaksOpen(v => !v)}
         tweaksOpen={tweaksOpen}
         meta={data.meta}
+        view={view}
+        go={go}
       />
       <Sidebar
         blocks={data.blocks}
@@ -472,8 +551,30 @@ function App() {
         completed={completed}
         quizCompleted={quizCompleted}
         totalMin={totalMin}
+        view={view}
+        go={go}
+        sprintsDone={sprintsDone}
+        activeSprint={activeSprintId}
       />
-      <BlockView
+      {view === "inicio" && (
+        <HomeView footer={<SiteFooter onResetAsk={onResetAsk} />} completed={completed} nav={go} seen={capsSeen} onSeen={markSeen}
+          stats={{ pct, totalMin, sprintsDone: Object.values(sprintsDone).filter(Boolean).length }} />
+      )}
+      {view === "capsulas" && <CapsulasView footer={<SiteFooter onResetAsk={onResetAsk} />} nav={go} seen={capsSeen} onSeen={markSeen} />}
+      {view === "aplica" && !activeSprint && <AplicaView footer={<SiteFooter onResetAsk={onResetAsk} />} nav={go} sprintsDone={sprintsDone} />}
+      {view === "aplica" && activeSprint && (
+        <SprintView
+          key={activeSprint.id}
+          sprint={activeSprint}
+          footer={<SiteFooter onResetAsk={onResetAsk} />}
+          nav={go}
+          done={!!sprintsDone[activeSprint.id]}
+          toggleDone={() => setSprintsDone(d => ({ ...d, [activeSprint.id]: !d[activeSprint.id] }))}
+          checks={sprintChecks[activeSprint.id]}
+          setCheck={(i) => setSprintChecks(c => ({ ...c, [activeSprint.id]: { ...(c[activeSprint.id] || {}), [i]: !((c[activeSprint.id] || {})[i]) } }))}
+        />
+      )}
+      {view === "bloque" && <BlockView
         block={activeBlock}
         completed={completed}
         toggleLesson={toggleLesson}
@@ -482,11 +583,13 @@ function App() {
         onQuizDone={onQuizDone}
         showCelebration={isLastBlock && allDone}
         celebrationProps={{ onPrint, onReset: onResetAsk, stats: celebrationStats }}
+        go={go}
+        onSeen={markSeen}
         nav={<>
           <BlockNav data={data} activeBlockId={activeBlockId} setActiveBlockId={setActiveBlockId} />
           <SiteFooter onResetAsk={onResetAsk} />
         </>}
-      />
+      />}
       {tweaksOpen && <TweaksPanel config={config} setConfig={setConfig} onClose={() => setTweaksOpen(false)} />}
     </div>
   );

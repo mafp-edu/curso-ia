@@ -103,8 +103,29 @@ function Callout({ kind, head, children }) {
 }
 
 function BigNumbers({ items }) {
+  // Mide una vez el ancho de cada cifra (en em) y deja que el CSS la ajuste al ancho de su celda
+  // (100cqi * --bn-q): todo el grupo comparte la misma escala y nunca se sale de la columna.
+  const ref = React.useRef(null);
+  React.useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return undefined;
+    const measure = () => {
+      const nums = [...el.querySelectorAll(".big-number")];
+      const data = nums.map((n, i) => {
+        const r = document.createRange(); r.selectNodeContents(n);
+        const fsNow = parseFloat(getComputedStyle(n).fontSize) || 1;
+        const em = r.getBoundingClientRect().width / fsNow;
+        return { n, base: (items[i] && items[i].fs) || 92, em };
+      });
+      const widest = Math.max(...data.map(d => d.em * d.base), 1);
+      data.forEach(d => d.n.style.setProperty("--bn-q", (d.base / widest).toFixed(4)));
+    };
+    measure();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    return undefined;
+  }, [items]);
   return (
-    <div className="grid-3" style={{ margin: "8px 0 16px" }}>
+    <div ref={ref} className="grid-3 bignums" style={{ margin: "8px 0 16px" }}>
       {items.map((it, i) => (
         <div key={i}>
           <div className={`big-number ${it.c || ""}`} style={it.fs ? { "--bn-fs": `${it.fs}px` } : undefined}>{it.n}</div>
