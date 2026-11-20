@@ -5,27 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trabajando con IAG | Copilot | MAF</title>
   <meta name="description" content="Curso autoguiado sobre uso responsable de IA generativa en el trabajo: Microsoft Copilot Chat y un anexo práctico de Claude." />
-  <link rel="preconnect" href="https://unpkg.com" crossorigin />
+  <meta name="author" content="Miguel Ángel Fernández" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=7" />
-
-  <!-- Builds de producción de React 18.3.1 (mismos archivos del paquete npm; hash SRI calculados sobre esos archivos) -->
-  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="styles.css?v=8" />
 </head>
 <body>
   <div id="root"></div>
   <noscript>Este curso necesita JavaScript activado para mostrarse.</noscript>
 
-  <script src="content.js?v=7"></script>
-  <script type="text/babel" data-presets="react" src="components.jsx?v=7"></script>
-  <script type="text/babel" data-presets="react" src="app.jsx?v=7"></script>
-  <script type="text/babel" data-presets="react">
-    const root = ReactDOM.createRoot(document.getElementById("root"));
-    root.render(<App />);
-  </script>
+  <!-- React 18.3.1 de producción, servido desde el repositorio (ver build.mjs) -->
+  <script src="vendor/react.production.min.js"></script>
+  <script src="vendor/react-dom.production.min.js"></script>
+  <!-- Contenido del curso: se edita directo, sin compilar -->
+  <script src="content.js?v=8"></script>
+  <!-- app.jsx y components.jsx compilados con «npm run build» -->
+  <script src="dist/app.min.js?v=8"></script>
 </body>
 </html>
