@@ -6,8 +6,8 @@ window.COURSE_DATA = {
   meta: {
     audiencia: "Profesionales | Chile",
     caso: "Reportes ejecutivos mensuales",
-    duracionMin: 120,
-    totalBloques: 5,
+    duracionMin: 170, // referencial; la app suma los minutos indicados en el rótulo de cada bloque
+    totalBloques: 6,
   },
   blocks: [
     // =========================================================
@@ -850,8 +850,208 @@ window.COURSE_DATA = {
         "Agent Builder incluido: hasta 4 URL públicas; los datos de la empresa se cobran por consumo.",
         "Construye tu primer agente con CORE en las instrucciones.",
       ],
-      cliffhanger: "",
+      cliffhanger: "Si además de Copilot usas Claude, el anexo práctico que sigue parte desde cero.",
       aforismo: "Copilot rinde más en manos de quien piensa con criterio.",
+    },
+
+    // =========================================================
+    // BLOQUE 5 | Anexo práctico: Claude desde cero
+    // Datos verificados en support.claude.com y privacy.claude.com el 20-nov-2026.
+    // =========================================================
+    {
+      id: "b5",
+      num: 5,
+      title: "Claude desde cero",
+      eyebrow: "Bloque 05 | Anexo práctico | 40 min",
+      lede: "Para quienes han usado Claude poco o nada. Las reglas del curso (CORE, anonimizar, verificar) aplicadas a otra herramienta, paso a paso.",
+      badge: "8 lecciones | Quiz",
+      lessons: [
+        {
+          id: "L5.1",
+          code: "L5.1",
+          dur: "4 min",
+          eyebrow: "Acceso",
+          title: "Crear la cuenta e iniciar sesión",
+          body: [
+            { t: "p", x: "Claude funciona en el navegador (**claude.ai**), en una app de escritorio para Mac y Windows, y en apps para iOS y Android. La misma cuenta sirve en todos lados y tus conversaciones se sincronizan." },
+            { t: "grid3", items: [
+              { title: "1 | Entra a claude.ai", body: "Elige continuar con tu cuenta de Google o con tu correo. Con correo, Claude te envía un enlace seguro (o un código, si lo abres en otro dispositivo)." },
+              { title: "2 | Verifica lo que pida", body: "Al crear la cuenta puede pedirte confirmar un número de teléfono. Debes tener 18 años o más y estar en un país donde Claude esté disponible; Chile lo está." },
+              { title: "3 | Instala las apps si te sirven", body: "La app de escritorio y la móvil son opcionales. Sirven para tener Claude a mano fuera del navegador." },
+            ]},
+            { t: "callout", kind: "nota", head: "Si tu empresa ya tiene Claude", x: "Si tu organización contrató un plan Team o Enterprise, entra con la cuenta corporativa (a veces con inicio de sesión único). Así tus conversaciones quedan bajo el contrato de la empresa y no bajo los términos de una cuenta personal." },
+            { t: "src", x: "Fuentes: Claude Help Center, [«Get started with Claude»](https://support.claude.com/en/articles/8114491-get-started-with-claude) y [«Log in to your Claude account»](https://support.claude.com/en/articles/13189465-log-in-to-your-claude-account), consultados el 20-nov-2026; Anthropic, [«Supported countries and regions»](https://www.anthropic.com/supported-countries), consultado el 20-nov-2026 (incluye Chile)." },
+          ],
+        },
+        {
+          id: "L5.2",
+          code: "L5.2",
+          dur: "4 min",
+          eyebrow: "Planes",
+          title: "Qué distingue los planes",
+          body: [
+            { t: "grid3", items: [
+              { title: "Gratuito", body: "Para partir. Tiene un límite de uso por sesión que se reinicia cada cinco horas y permite hasta cinco proyectos." },
+              { title: "Pro, Max y Ultra", body: "Planes individuales de pago con más uso que el gratuito. Pro tiene además un límite semanal y prioridad en horas de alta demanda; Max y Ultra apuntan a uso intensivo." },
+              { title: "Team y Enterprise", body: "Para organizaciones. Team va de 2 a 150 personas, con administración y facturación centralizadas, inicio de sesión único y proyectos compartidos." },
+            ]},
+            { t: "callout", kind: "tip", head: "Precios", x: "No los incluimos porque cambian y dependen del país. Revísalos en la página de precios de Claude antes de decidir." },
+            { t: "src", x: "Fuentes: Claude Help Center, [«What is the Pro plan?»](https://support.claude.com/en/articles/8325606-what-is-the-pro-plan), [«What is the Team plan?»](https://support.claude.com/en/articles/9266767-what-is-the-team-plan) y [«What are projects?»](https://support.claude.com/en/articles/9517075-what-are-projects), consultados el 20-nov-2026." },
+          ],
+        },
+        {
+          id: "L5.3",
+          code: "L5.3",
+          dur: "5 min",
+          eyebrow: "Primera conversación",
+          title: "Tu primer pedido, con CORE",
+          body: [
+            { t: "p", x: "Escribe como le escribirías a un colega. El botón **+** del cuadro de chat (o escribir «/») muestra las demás opciones: adjuntar archivos, conectores y otras herramientas. El esquema CORE que ya conoces funciona igual que en Copilot." },
+            { t: "prompt-core", title: "Ejemplo CORE en Claude",
+              lines: [
+                { tag: "C", x: "Soy gerente comercial de una pyme de servicios en Concepción. Estamos evaluando lanzar un servicio de mantención preventiva para clientes industriales." },
+                { tag: "O", x: "Necesito una lista de las 5 preguntas que debería responder antes de invertir, ordenadas por riesgo." },
+                { tag: "R", x: "No inventes cifras de mercado. Si una pregunta requiere un dato que no tienes, dilo. Máximo 150 palabras." },
+                { tag: "E", x: "Una tabla con tres columnas: pregunta | por qué importa | cómo la respondería con poco presupuesto." },
+              ],
+            },
+            { t: "callout", kind: "tip", head: "Itera en la misma conversación", x: "Si la primera respuesta no sirve, corrige ahí mismo: «la columna 3 es muy genérica, dame ejemplos para Concepción». Pídele también que marque lo que no sabe con certeza." },
+            { t: "src", x: "Fuente: Claude Help Center, [«Get started with Claude»](https://support.claude.com/en/articles/8114491-get-started-with-claude), consultado el 20-nov-2026." },
+          ],
+        },
+        {
+          id: "L5.4",
+          code: "L5.4",
+          dur: "5 min",
+          eyebrow: "Archivos",
+          title: "Subir archivos y pedir análisis",
+          body: [
+            { t: "p", x: "Adjunta archivos con el botón **+**, arrastrándolos al chat o pegando imágenes. Claude lee PDF, Word, CSV, texto, HTML, JSON, Excel e imágenes (JPEG, PNG, GIF, WebP)." },
+            { t: "bignums", items: [
+              { n: "20", l: "Archivos por conversación", c: "marine" },
+              { n: "500 MB", l: "Tamaño máximo por archivo en el chat", c: "burgundy", fs: 64 },
+              { n: "30 MB", l: "Tamaño máximo por archivo en un proyecto", c: "olive", fs: 64 },
+            ]},
+            { t: "callout", kind: "alert", head: "Antes de subir", x: "Anonimiza igual que en Copilot: reemplaza nombres, RUT, correos y montos sensibles por marcadores. Para analizar planillas Excel, Claude necesita tener activada la capacidad de crear y editar archivos (ejecución de código) en la configuración." },
+            { t: "p", x: "Para análisis numérico, pide que muestre el cálculo y la fórmula que usó. Así puedes rehacerlo en Excel y comparar." },
+            { t: "src", x: "Fuente: Claude Help Center, [«Upload files to Claude»](https://support.claude.com/en/articles/8241126-upload-files-to-claude), 23-jul-2026." },
+          ],
+        },
+        {
+          id: "L5.5",
+          code: "L5.5",
+          dur: "5 min",
+          eyebrow: "Proyectos",
+          title: "Proyectos con instrucciones y archivos",
+          body: [
+            { t: "p", x: "Un **proyecto** es un espacio de trabajo con sus propias conversaciones, **instrucciones** (por ejemplo, tono formal o un rol profesional) y **archivos de referencia**. Todo chat que abras dentro del proyecto parte con ese contexto, sin que tengas que repetirlo." },
+            { t: "grid2", items: [
+              { title: "Qué ofrece", body: "Disponible en todos los planes; el gratuito permite hasta cinco proyectos. En los planes de pago, si los archivos superan el contexto, Claude pasa a un modo de búsqueda que amplía la capacidad hasta diez veces." },
+              { title: "En equipo", body: "En Team y Enterprise puedes compartir un proyecto con permiso para ver (usar y conversar) o para editar (cambiar instrucciones y archivos)." },
+            ]},
+            { t: "callout", kind: "nota", head: "Lo que ya conoces", x: "Un proyecto cumple la función del agente que armaste en Agent Builder (Bloque 4) y del agente con instrucciones y archivos del Taller 4 del MBA: instrucciones fijas más documentos de referencia. Puedes reutilizar las mismas instrucciones CORE." },
+            { t: "src", x: "Fuente: Claude Help Center, [«What are projects?»](https://support.claude.com/en/articles/9517075-what-are-projects), consultado el 20-nov-2026." },
+          ],
+        },
+        {
+          id: "L5.6",
+          code: "L5.6",
+          dur: "7 min",
+          eyebrow: "Funciones",
+          title: "Artefactos, búsqueda web, conectores y skills",
+          body: [
+            { t: "grid2", items: [
+              { title: "Artefactos", body: "Contenido sustancial que Claude abre al lado de la conversación: documentos, código, sitios de una página, diagramas, tableros o herramientas pequeñas. Parten privados y quedan guardados en la sección de artefactos. Requieren activar la capacidad de crear y editar archivos." },
+              { title: "Búsqueda web", body: "Claude puede buscar en la web y cita sus fuentes en cada respuesta. Según la versión que tengas, se activa desde el botón **+** o Claude decide solo cuándo buscar. En Team y Enterprise primero la habilita un administrador." },
+              { title: "Conectores", body: "Conectan Claude con tus aplicaciones (Google Drive, Gmail, Slack, Microsoft 365, entre otras) usando tus mismos permisos. Al conectar un servicio autorizas a Claude a leer y, según el caso, modificar datos en él. El plan gratuito admite un conector personalizado." },
+              { title: "Skills", body: "Carpetas de instrucciones, scripts y recursos que Claude carga cuando son pertinentes. Anthropic ofrece skills para Excel, Word, PowerPoint y PDF que se usan solas; tú o tu organización pueden crear otras. Requieren tener activada la ejecución de código." },
+            ]},
+            { t: "src", x: "Fuentes (Claude Help Center, consultados el 20-nov-2026): [«What are artifacts and how do I use them?»](https://support.claude.com/en/articles/17153992-what-are-artifacts-and-how-do-i-use-them); [«Enable and use web search»](https://support.claude.com/en/articles/10684626-enable-and-use-web-search); [«Use connectors to extend Claude's capabilities»](https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities); [«What are skills?»](https://support.claude.com/en/articles/12512176-what-are-skills). Los nombres de menús cambian seguido, por eso describimos la función sin la ruta exacta." },
+          ],
+        },
+        {
+          id: "L5.7",
+          code: "L5.7",
+          dur: "4 min",
+          eyebrow: "Cuidados",
+          title: "Qué verificar y qué no delegar",
+          body: [
+            { t: "compare", good: {
+              head: "Delegar con revisión",
+              items: ["Primeros borradores y estructura de un informe", "Resumir documentos que tú subiste", "Ordenar y clasificar datos anonimizados", "Proponer preguntas, escenarios y alternativas"],
+            }, bad: {
+              head: "No delegar",
+              items: ["La decisión final y su firma", "Cifras que van al directorio sin recalcularlas", "Citas o fuentes sin abrir el enlace", "Datos personales o confidenciales sin anonimizar"],
+            }},
+            { t: "callout", kind: "alert", head: "Tus datos y el entrenamiento", x: "En los planes individuales (gratuito, Pro y Max), Anthropic puede usar tus chats para entrenar modelos si lo permites en la opción de mejora del modelo de tu configuración de privacidad; los chats de incógnito quedan fuera. En los planes comerciales (Team, Enterprise y la API) no se usan por defecto. Para información de la empresa, usa la cuenta corporativa si existe y anonimiza igual: la Ley 21.719 aplicará a cualquier herramienta." },
+            { t: "src", x: "Fuentes: Claude Privacy Center, [«Is my data used for model training?»](https://privacy.claude.com/en/articles/10023580-is-my-data-used-for-model-training), 16-mar-2026 (planes individuales), y [mismo título para productos comerciales](https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training), 18-ago-2026." },
+          ],
+        },
+        {
+          id: "L5.8",
+          code: "L5.8",
+          dur: "6 min",
+          eyebrow: "Ejercicio",
+          title: "Caso de empresa | leer los resultados de una puerta falsa",
+          kind: "exercise",
+          body: [
+            { t: "p", x: "Tu equipo terminó un experimento de puerta falsa: una página publicada en Netlify, un formulario en Tally y el conteo de visitas en GoatCounter. Tienes dos exportaciones en CSV, visitas por día y respuestas del formulario. El comité quiere saber si conviene seguir." },
+            { t: "agent-steps", steps: [
+              { n: "1", title: "Anonimiza", body: "En el CSV de Tally reemplaza nombres, correos y teléfonos por marcadores ([CONTACTO_1], [DATO_CONTACTO])." },
+              { n: "2", title: "Crea un proyecto", body: "Llámalo «Validación de demanda» y escribe sus instrucciones con CORE (usa la caja de abajo)." },
+              { n: "3", title: "Sube y pregunta", body: "Sube los dos CSV y pide la tasa de conversión de visitas a registros, por día y total, mostrando la fórmula." },
+              { n: "4", title: "Pide un artefacto", body: "Un resumen de una página para el comité: resultado, supuestos, limitaciones y una recomendación (seguir, ajustar o descartar)." },
+              { n: "5", title: "Verifica", body: "Recalcula la tasa en Excel y compárala con el panel de GoatCounter. Marca cualquier cifra que no cuadre antes de enviar." },
+            ]},
+            { t: "exercise-textarea" },
+          ],
+        },
+      ],
+      quiz: {
+        title: "Quiz Bloque 5 | Claude desde cero",
+        questions: [
+          {
+            stem: "Quieres que Claude use siempre las mismas instrucciones y los mismos documentos de referencia en varias conversaciones. ¿Qué usas?",
+            options: [
+              "Un artefacto.",
+              "Un proyecto con instrucciones y archivos.",
+              "La búsqueda web.",
+              "Un chat de incógnito.",
+            ],
+            correct: 1,
+            explain: "El proyecto guarda instrucciones y archivos y los aplica a cada conversación que abras dentro de él. Cumple la función del agente que armaste en el Bloque 4.",
+          },
+          {
+            stem: "Sobre el uso de tus conversaciones para entrenar modelos:",
+            options: [
+              "Claude nunca usa conversaciones, en ningún plan.",
+              "Todos los planes las usan siempre, sin opción.",
+              "En planes individuales depende de una opción de privacidad que tú controlas; en los planes comerciales no se usan por defecto.",
+              "Solo se usan si subes archivos.",
+            ],
+            correct: 2,
+            explain: "En los planes individuales decides con la opción de mejora del modelo (y los chats de incógnito quedan fuera). En Team, Enterprise y la API no se usan por defecto. En cualquier caso, anonimiza los datos de la empresa.",
+          },
+          {
+            stem: "Al conectar Google Drive a Claude mediante un conector:",
+            options: [
+              "Claude ve todos los archivos de la empresa, incluso los que tú no puedes abrir.",
+              "Claude accede con tus mismos permisos y, según el conector, podría también modificar datos.",
+              "Claude solo puede leer archivos públicos.",
+              "Los archivos se copian para siempre en tu cuenta de Claude.",
+            ],
+            correct: 1,
+            explain: "Los conectores heredan tus permisos en el servicio conectado. Al conectar autorizas a Claude a leer y, según el caso, modificar datos; conecta solo lo que necesitas.",
+          },
+        ],
+      },
+      paraLlevar: [
+        "Mismas reglas que en Copilot: CORE, anonimizar y verificar.",
+        "Un proyecto con instrucciones y archivos evita repetir el contexto.",
+        "Revisa la opción de privacidad de tu cuenta y prefiere la cuenta corporativa para datos de la empresa.",
+      ],
+      cliffhanger: "",
+      aforismo: "Claude redacta y calcula rápido; la firma del informe sigue siendo tuya.",
     },
   ],
 };
