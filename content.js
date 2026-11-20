@@ -247,14 +247,15 @@ window.COURSE_DATA = {
           title: "Ley 21.719 en la práctica",
           body: [
             { t: "bignums", items: [
-              { n: "2027", l: "Vigencia prevista tras la postergación (15 de octubre)", c: "burgundy" },
-              { n: "20.000", l: "UTM de multa máxima (más en caso de reincidencia)", c: "marine" },
-              { n: "GDPR", l: "Estándar europeo de referencia", c: "olive" },
+              { n: "2027", l: "Vigencia aprobada por el Congreso (15 de octubre), pendiente de publicación", c: "burgundy" },
+              { n: "20.000", l: "UTM, multa máxima por infracción gravísima", c: "marine" },
+              { n: "4 %", l: "De los ingresos anuales, tope para grandes empresas que reinciden en infracciones gravísimas", c: "olive" },
             ]},
-            { t: "p", x: "La Ley 21.719 se publicó el 13 de diciembre de 2024 y debía entrar en vigencia el 1 de diciembre de 2026. El 17 de noviembre de 2026 el Congreso despachó un proyecto que la posterga al **15 de octubre de 2027**; al cierre de esta revisión (20-nov-2026) faltaba su publicación en el Diario Oficial. Confirma la fecha vigente antes de citarla." },
-            { t: "src", x: "Fuentes: Aninat Abogados, [«Congreso aprueba postergar la entrada en vigencia de la Ley N°21.719...»](https://aninat.cl/noticias-insights/alerta-legal-congreso-aprueba-postergar-la-entrada-en-vigencia-de-la-ley-n21-719-de-datos-personales-hasta-el-15-de-octubre-de-2027/), 17-nov-2026; Usercentrics, [«Ley de protección de datos en Chile»](https://usercentrics.com/es/knowledge-hub/ley-proteccion-datos-chile/), consultado el 20-nov-2026 (fecha de publicación y multas)." },
-            { t: "p", x: "La **empresa es responsable** del tratamiento de los datos personales. Pegar información identificable de un cliente sin anonimizar en cualquier herramienta, Copilot incluido, compromete a la organización. La postergación da más plazo, pero el buen hábito conviene desde hoy." },
-            { t: "callout", kind: "alert", head: "Implicancia directa", x: "El escudo verde protege el canal y no te exime del deber de anonimizar. Son capas distintas, una técnica y otra legal." },
+            { t: "p", x: "La Ley 21.719, publicada en el Diario Oficial el 13 de diciembre de 2024, modifica la Ley 19.628 y fija su entrada en vigencia el primer día del mes vigésimo cuarto posterior a su publicación, esto es, el 1 de diciembre de 2026. Sin embargo, el 17 de noviembre de 2026 el Congreso despachó el proyecto que posterga esa fecha al **15 de octubre de 2027** (boletín 18.623-07), que a esa fecha quedaba pendiente de promulgación y publicación. Mientras la postergación no se publique, la fecha legal sigue siendo el 1 de diciembre de 2026, por lo que hay que confirmar su estado antes de citarla." },
+            { t: "p", x: "En cuanto a sanciones, la ley distingue infracciones leves (amonestación escrita o multa de hasta 5.000 UTM), graves (hasta 10.000 UTM) y gravísimas (hasta 20.000 UTM). En caso de reincidencia la multa puede llegar al triple y, para las empresas que no son de menor tamaño y reinciden en infracciones graves o gravísimas, hasta el 2 % o el 4 % de sus ingresos anuales, respectivamente. A su vez, durante los primeros doce meses de vigencia, a las empresas de menor tamaño se les puede aplicar una amonestación escrita como sanción." },
+            { t: "p", x: "La ley define como **responsable de datos** a quien decide los fines y medios del tratamiento. Así, cuando una empresa trata datos de sus clientes la responsable es ella, y pegar información identificable sin anonimizar en cualquier herramienta, Copilot incluido, la compromete. Si bien la postergación da más plazo, nada impide adquirir desde hoy el hábito de anonimizar." },
+            { t: "src", x: "Fuentes: Ley 21.719, [Diario Oficial N° 44.023, 13-dic-2024](https://www.diariooficial.interior.gob.cl/publicaciones/2024/12/13/44023/01/2583630.pdf) (arts. 2 letra n y 35 de la Ley 19.628 modificada, y artículo primero transitorio); Garrigues, [«El Senado chileno aprueba proyecto de ley que busca postergar al 15 de octubre de 2027 la entrada en vigencia...»](https://www.garrigues.com/es_ES/noticia/senado-chileno-aprueba-proyecto-ley-busca-postergar-15-octubre-2027-entrada-vigencia-nueva), 28-oct-2026 (primer trámite y boletín); Aninat Abogados, [«Congreso aprueba postergar la entrada en vigencia de la Ley N°21.719...»](https://aninat.cl/noticias-insights/alerta-legal-congreso-aprueba-postergar-la-entrada-en-vigencia-de-la-ley-n21-719-de-datos-personales-hasta-el-15-de-octubre-de-2027/), 17-nov-2026 (despacho a ley). Revisado el 20-nov-2026." },
+            { t: "callout", kind: "alert", head: "Implicancia directa", x: "El escudo verde protege el canal, pero no exime del deber de anonimizar, ya que se trata de capas distintas, una técnica y otra legal." },
           ],
         },
         {
@@ -311,7 +312,7 @@ window.COURSE_DATA = {
             explain: "Con EDP, Microsoft trata tus prompts y respuestas como encargado, bajo el DPA, y no los usa para entrenar. No te exime de la ley y no cubre las consultas web enviadas a Bing.",
           },
           {
-            stem: "La Ley 21.719 de protección de datos personales ya fue publicada, aunque su vigencia se está postergando. Respecto de Copilot:",
+            stem: "La Ley 21.719 ya fue publicada y el Congreso aprobó postergar su entrada en vigencia. Respecto de Copilot:",
             options: [
               "Mientras uses el escudo verde no necesitas anonimizar.",
               "Solo aplica a empresas con más de 200 empleados.",
@@ -319,7 +320,7 @@ window.COURSE_DATA = {
               "Los datos de clientes chilenos no aplican si el servidor está fuera de Chile.",
             ],
             correct: 2,
-            explain: "La responsabilidad de tratamiento recae en la empresa independientemente del proveedor de IA. Siempre debes anonimizar antes de pegar.",
+            explain: "La ley llama responsable a quien decide los fines y medios del tratamiento, y esa responsabilidad sigue en la empresa aunque use un proveedor de IA, razón por la cual hay que anonimizar siempre antes de pegar.",
           },
           {
             stem: "¿Cuál de los siguientes puedes pegar tal cual en Copilot?",
