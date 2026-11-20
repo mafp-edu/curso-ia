@@ -44,25 +44,26 @@ window.COURSE_DATA = {
           eyebrow: "Mecánica",
           title: "Qué hace un LLM · el ejemplo de la capital",
           body: [
-            { t: "p", x: "Definición operativa, sin tecnicismos: un LLM es un **autocompletador industrial** entrenado con trillones de tokens de texto. Dado todo lo que lleva leído, predice la **siguiente palabra más probable**. Punto." },
+            { t: "p", x: "Definición operativa, sin tecnicismos: un LLM es un **autocompletador a escala industrial**, entrenado con billones de tokens de texto (un token es un trozo de palabra). Con todo lo que tiene escrito hasta ese momento, predice el **siguiente token más probable**, y repite el proceso hasta completar la respuesta." },
             { t: "bignums", items: [
-              { n: "1 token", l: "Lo único que predice a la vez", c: "burgundy" },
-              { n: "∼15T", l: "Tokens de entrenamiento (orden de magnitud)", c: "marine" },
-              { n: "0", l: "Consultas a bases de datos", c: "olive" },
+              { n: "1", l: "Token predicho en cada paso", c: "burgundy" },
+              { n: "15 billones", l: "Tokens de entrenamiento de Llama 3", c: "marine", fs: 52 },
+              { n: "0", l: "Fuentes que consulta el modelo por sí solo, sin búsqueda ni archivos", c: "olive" },
             ]},
-            { t: "p", x: "**Experimento mental.** Imagina que le preguntas a un LLM: *¿cuál es el capital de Chile?* Aprieta el botón abajo y observa qué responde — y después, por qué." },
+            { t: "src", x: "Fuente de la cifra: Meta, [«Introducing Meta Llama 3»](https://ai.meta.com/blog/meta-llama-3/), 18 de abril de 2024 («pretrained on over 15T tokens»). En inglés se dice *15 trillion*; en español son 15 billones (15 × 10¹²). Los modelos más recientes publican poco sobre este dato; tómalo como orden de magnitud." },
+            { t: "p", x: "**Experimento mental.** Imagina que le preguntas a un LLM: *¿cuál es el capital de Chile?* La pregunta tiene un juego intencional. «La capital» (femenino) es la ciudad sede del gobierno; «el capital» (masculino) son los recursos económicos de un país, como el dinero, las materias primas o la gente preparada. Aprieta el botón y observa qué responde. Después veremos por qué." },
             { t: "llm-sim",
               user: "¿Cuál es el capital de Chile?",
               answer: "Santiago.",
               reveals: [
                 { head: "Lo que acaba de pasar",
-                  x: "El LLM vio la frase *'el capital de Chile'* y predijo la continuación más frecuente en su corpus: **Santiago**. No consultó nada. No razonó. Solo eligió la palabra estadísticamente dominante." },
-                { head: "Lo que un humano habría respondido (con criterio)",
-                  x: "Un profesional chileno, leyendo con atención, podría responder **'cobre'** (el capital económico del país), **'capital humano'** (fuerza laboral, educación), o **'hub de negocios'** — porque la palabra *capital* tiene varias acepciones y el humano **las desambigua** con contexto e intención." },
+                  x: "En esta simulación, el modelo leyó *«capital de Chile»* y completó con la continuación más frecuente en los textos con que se entrenó: **Santiago**. No consultó ninguna fuente ni se detuvo en el artículo «el». Eligió la respuesta más probable." },
+                { head: "Lo que habría respondido una persona atenta",
+                  x: "Alguien que lee con cuidado nota el «el» y puede responder **cobre** (el principal recurso exportador del país) o **capital humano** (la fuerza de trabajo y su formación). La palabra *capital* tiene varias acepciones y la persona **elige una según el contexto y la intención** de quien pregunta." },
                 { head: "La lección",
-                  x: "Un LLM predice la **siguiente palabra más probable**. Sin contexto, va a la media estadística. Por eso la **C de CORE** — que verás en el Bloque 2 — es Contexto: le entregas el marco que evita que vaya a la respuesta genérica." },
+                  x: "Un LLM predice la **continuación más probable**. Si la pregunta es ambigua y no trae contexto, se va a la interpretación más común. Los modelos actuales a veces piden una aclaración, pero no conviene contar con eso. Por eso la **C de CORE**, que verás en el Bloque 2, es Contexto: le entregas el marco que evita la respuesta genérica." },
                 { head: "Por qué importa para tu reporte",
-                  x: "Si Copilot alucina una cifra, no es maldad ni bug: es la misma máquina de 'Santiago' pero con un número que *suena correcto*. **Plausible ≠ verdadero.** Tu juicio es el filtro." },
+                  x: "Cuando Copilot inventa una cifra, actúa el mismo mecanismo que produjo «Santiago»: elige un número que *suena correcto*. Que algo sea plausible no lo hace verdadero, y tu juicio es el filtro." },
               ],
             },
           ],
@@ -72,17 +73,18 @@ window.COURSE_DATA = {
           code: "L0.3",
           dur: "5 min",
           eyebrow: "Caso real",
-          title: "Apple Card · sesgo sin variable protegida",
+          title: "Apple Card | la sospecha de sesgo y lo que mostró la investigación",
           body: [
-            { t: "p", x: "**2019.** Apple y Goldman Sachs lanzan la Apple Card. David Heinemeier Hansson (creador de Ruby on Rails) denuncia públicamente que su esposa, con **mejor historial crediticio** que él, recibió un cupo **20 veces menor**. Steve Wozniak confirma el mismo patrón con su pareja. Goldman responde: 'el algoritmo no mira género'." },
+            { t: "p", x: "**Noviembre de 2019.** David Heinemeier Hansson, creador de Ruby on Rails, denunció en Twitter que la Apple Card (emitida por Goldman Sachs) le había dado un cupo **20 veces mayor** que a su esposa, aunque declaraban impuestos en conjunto. Steve Wozniak contó que a él le habían dado 10 veces el cupo de su esposa. Goldman respondió que no tomaba decisiones según el género, y el regulador financiero de Nueva York (NYDFS) abrió una investigación." },
             { t: "bignums", items: [
-              { n: "20×", l: "Diferencia de cupo reportada", c: "burgundy" },
-              { n: "0", l: "Variables de género en el modelo", c: "olive" },
-              { n: "NYDFS", l: "Regulador que investigó", c: "marine" },
+              { n: "20×", l: "Diferencia de cupo que denunció Hansson", c: "burgundy" },
+              { n: "~400.000", l: "Solicitudes analizadas por el NYDFS", c: "marine", fs: 56 },
+              { n: "0", l: "Infracciones a la ley de crédito justo encontradas", c: "olive" },
             ]},
-            { t: "callout", kind: "alert", head: "El giro", x: "Técnicamente el algoritmo no veía género. Pero aprendió de décadas de datos históricos donde las mujeres pidieron menos crédito, tuvieron menos ingreso registrado a su nombre, usaron tarjetas de pareja. El sesgo se colaba por **proxies**: ingreso, antigüedad laboral, historial como titular principal." },
-            { t: "p", x: "**Lección para el alumno:** la predicción estadística hereda los sesgos de los datos con los que se entrenó, incluso cuando parece neutral. Los LLMs heredan los sesgos, estilos, errores comunes y *groupthink* del corpus de internet. Por eso el juicio humano es el filtro, no un adorno." },
-            { t: "callout", kind: "nota", head: "Puente a Copilot", x: "Cuando Copilot te sugiera una redacción que 'suena a consultor genérico', o un hallazgo que parece obvio, recuerda: está promediando miles de textos parecidos. Tu valor profesional está en las frases que el promedio **no** genera." },
+            { t: "callout", kind: "nota", head: "El desenlace (marzo de 2021)", x: "El NYDFS concluyó que **no hubo discriminación ilegal**, ni intencional ni por impacto dispar. Las diferencias se explicaban por historiales de crédito individuales: por ejemplo, un cónyuge figuraba en la hipoteca y el otro no, o uno era solo usuario adicional de las tarjetas del otro. El informe agregó una advertencia: la puntuación de crédito, aun siendo legal, puede reflejar y perpetuar desigualdades históricas (*legacy bias*)." },
+            { t: "src", x: "Fuentes: MacRumors, [«Regulators Looking Into Claims of Gender Discrimination in Apple Card Credit Decisions»](https://www.macrumors.com/2019/11/10/apple-card-gender-discrimination/), 10-nov-2019; NYDFS, [*Report on Apple Card Investigation*](https://s3.documentcloud.org/documents/20521283/rpt_202103_apple_card_investigation.pdf), marzo de 2021." },
+            { t: "p", x: "**Lección para el alumno.** El caso deja dos enseñanzas. La primera: que un modelo no use una variable (aquí, el género) no basta para descartar diferencias, porque los datos históricos pueden traerlas por otras vías; hay que revisar los resultados con datos. La segunda: la acusación viral circuló mucho más rápido que la evidencia, y la investigación no la confirmó. Los LLM heredan patrones, sesgos y errores comunes de los textos con que se entrenaron, y una conclusión que suena convincente también necesita verificación." },
+            { t: "callout", kind: "nota", head: "Puente a Copilot", x: "Cuando Copilot te sugiera una redacción que suena a consultor genérico, o un hallazgo que parece obvio, recuerda que está promediando miles de textos parecidos. Tu aporte profesional está en lo que ese promedio **no** produce." },
           ],
         },
         {
@@ -90,21 +92,22 @@ window.COURSE_DATA = {
           code: "L0.4",
           dur: "5 min",
           eyebrow: "Economía",
-          title: "Prediction Machines · por qué tu juicio vale más",
+          title: "Prediction Machines | por qué tu juicio vale más",
           body: [
-            { t: "p", x: "**Agrawal, Gans y Goldfarb (2018, Harvard Business School Press)** resumen la revolución de la IA en una frase: *la IA bajó el costo de la predicción a casi cero.* Punto." },
+            { t: "p", x: "**Agrawal, Gans y Goldfarb** (*Prediction Machines*, Harvard Business Review Press, 2018) proponen leer el avance de la IA como **una caída en el costo de la predicción**. De ahí sacan tres consecuencias económicas." },
             { t: "bignums", items: [
               { n: "↓", l: "Costo de predecir", c: "olive" },
               { n: "↑", l: "Usos de la predicción", c: "marine" },
               { n: "↑↑", l: "Valor del juicio humano", c: "burgundy" },
             ]},
             { t: "grid3", items: [
-              { title: "1 · Usas más", body: "Tareas que antes no delegabas (clasificar 200 correos, resumir 50 páginas) ahora sí — porque predecir es gratis." },
-              { title: "2 · Aparecen usos nuevos", body: "Cosas que antes no compensaban hacer (un borrador por cada escenario, 10 variantes de un título) ahora valen la pena." },
-              { title: "3 · Los complementos suben", body: "Lo que **no** es predicción — el juicio, el criterio, el 'qué decirle al directorio' — se vuelve el cuello de botella. Vale **más**, no menos." },
+              { title: "1 | Usas más predicción", body: "Tareas que antes no delegabas (clasificar 200 correos, resumir 50 páginas) ahora se pueden delegar, porque predecir cuesta poco." },
+              { title: "2 | Aparecen usos nuevos", body: "Cosas que antes no compensaban (un borrador por escenario, diez variantes de un título) ahora valen la pena." },
+              { title: "3 | Los complementos suben", body: "Lo que **no** es predicción, como el juicio o decidir qué decirle al directorio, pasa a ser el cuello de botella y gana valor." },
             ]},
-            { t: "p", x: "Aplicado al reporte mensual: antes solo delegabas el formateo. Ahora puedes delegar el primer borrador, la clasificación masiva, el resumen de emails. El **juicio sobre qué significa cada hallazgo para la empresa sigue siendo tuyo** — y es donde ganas horas reales." },
-            { t: "aforismo-mini", x: "La predicción se abarató. El juicio, nunca." },
+            { t: "src", x: "Fuente: Agrawal, Gans y Goldfarb, *Prediction Machines: The Simple Economics of Artificial Intelligence*, Harvard Business Review Press, abril de 2018. La descripción oficial del libro habla de «a drop in the cost of prediction»." },
+            { t: "p", x: "Aplicado al reporte mensual: antes solo delegabas el formato. Ahora puedes delegar el primer borrador, la clasificación masiva y el resumen de correos. El **juicio sobre qué significa cada hallazgo para la empresa sigue siendo tuyo**, y ahí está el ahorro real de horas." },
+            { t: "aforismo-mini", x: "La predicción se abarató; el juicio sigue siendo caro." },
           ],
         },
       ],
@@ -120,18 +123,18 @@ window.COURSE_DATA = {
               "Verifica cada cifra contra fuentes oficiales en tiempo real.",
             ],
             correct: 1,
-            explain: "Un LLM predice token a token la continuación más probable. No consulta bases de datos ni razona formalmente — por eso alucina con confianza.",
+            explain: "Un LLM predice token a token la continuación más probable. Por sí solo no consulta bases de datos ni verifica, y por eso puede inventar con total seguridad.",
           },
           {
             stem: "El caso Apple Card enseña que:",
             options: [
-              "Los algoritmos son siempre neutrales si no usan la variable protegida.",
-              "Goldman Sachs programó deliberadamente sesgo de género.",
-              "Un modelo puede heredar sesgos históricos vía variables proxy, aunque 'no vea' la característica sensible.",
-              "El problema se resuelve quitando más variables del modelo.",
+              "Un algoritmo que no usa la variable sensible es neutral por definición.",
+              "Goldman Sachs programó deliberadamente un sesgo de género.",
+              "Excluir la variable sensible no basta para descartar diferencias: hay que revisar datos y resultados, como hizo el regulador.",
+              "El regulador confirmó la discriminación y multó al banco.",
             ],
             correct: 2,
-            explain: "El sesgo se coló por proxies (ingreso, historial como titular, antigüedad). 'No mirar género' no bastó — los datos de entrenamiento ya lo tenían codificado indirectamente.",
+            explain: "El NYDFS analizó cerca de 400.000 solicitudes y en 2021 no encontró discriminación ilegal: las diferencias venían de historiales de crédito distintos. Advirtió, eso sí, que los datos históricos pueden arrastrar sesgos. La conclusión salió de mirar datos, sin suponer neutralidad ni culpa de antemano.",
           },
           {
             stem: "Según Prediction Machines (Agrawal et al., 2018), cuando la predicción se abarata:",
@@ -186,21 +189,24 @@ window.COURSE_DATA = {
           eyebrow: "Qué es",
           title: "Copilot Chat Básico, en una página",
           body: [
+            { t: "p", x: "Microsoft lo llama hoy **Copilot Chat (Basic)**; en este curso le decimos Copilot Chat Básico." },
             { t: "grid3", items: [
-              { title: "Gratis, comercial", body: "Versión sin costo para empresas con cuenta corporativa Entra ID. No requiere licencia M365 Copilot." },
-              { title: "No es Copilot personal", body: "Distinto del que viene con cuentas Hotmail / personal. Este vive en el tenant de tu empresa." },
-              { title: "Dónde vive", body: "m365.cloud.microsoft/chat — accedes con tu cuenta corporativa." },
+              { title: "Incluido, sin licencia extra", body: "Viene con las licencias Microsoft 365 elegibles de tu empresa. No requiere la licencia pagada Microsoft 365 Copilot." },
+              { title: "Con tu cuenta del trabajo", body: "Se usa iniciando sesión con la cuenta corporativa (Microsoft Entra). Si entras con una cuenta personal (Hotmail, Outlook.com), no tienes la protección de datos empresarial." },
+              { title: "Dónde vive", body: "En **copilot.cloud.microsoft** (antes m365.cloud.microsoft/chat), en la app Microsoft Copilot, en Edge y dentro de Outlook y Teams." },
             ]},
-            { t: "schema", label: "Ubicación del escudo verde", parts: [
+            { t: "src", x: "Fuente: Microsoft Learn, [«Microsoft Copilot Chat overview»](https://learn.microsoft.com/copilot/overview), actualizado el 17-nov-2026. Microsoft cambia nombres y direcciones con frecuencia; revisa la página si algo no calza." },
+            { t: "schema", label: "Esquema ilustrativo del escudo verde", parts: [
               { kind: "topbar" },
               { kind: "row", items: [
-                { box: "Lienzo de chat" },
+                { box: "Nuevo chat" },
                 { box: "Escudo verde ▲", highlight: true },
+                { box: "Lienzo de chat", width: 2 },
               ]},
               { kind: "row", items: [
-                { box: "Caja de prompt · 'Escribe aquí...'" },
+                { box: "Caja de prompt | «Escribe aquí...»" },
               ]},
-              { arrow: "↑ Indicador de Enterprise Data Protection activo" },
+              { arrow: "↑ Parte superior, junto al botón de nuevo chat: protección de datos empresarial activa" },
             ]},
           ],
         },
@@ -211,18 +217,26 @@ window.COURSE_DATA = {
           eyebrow: "Garantía corporativa",
           title: "El escudo verde y Enterprise Data Protection",
           body: [
+            { t: "p", x: "Enterprise Data Protection (EDP) es el conjunto de compromisos contractuales de Microsoft sobre los datos de tu empresa en Copilot Chat. Microsoft actúa como encargado del tratamiento, bajo el anexo de protección de datos (DPA) y los términos de producto, sin costo adicional." },
             { t: "bignums", items: [
-              { n: "3", l: "Garantías de EDP", c: "burgundy" },
-              { n: "0", l: "Usos para entrenar modelos", c: "olive" },
+              { n: "0", l: "Prompts y respuestas usados para entrenar los modelos", c: "olive" },
             ]},
             { t: "compare", bad: {
-              head: "NO cubre EDP",
-              items: ["Búsquedas web de Bing", "Imágenes generadas externamente", "Respuestas con citas web abiertas"],
+              head: "Queda fuera de EDP",
+              items: [
+                "Las consultas web que Copilot envía a Bing. Se rigen por el contrato de servicios de Microsoft y su declaración de privacidad; van sin identificadores de usuario ni de empresa.",
+                "Lo que escribas usando una cuenta personal en vez de la del trabajo.",
+              ],
             }, good: {
-              head: "SÍ cubre EDP",
-              items: ["Tus prompts y respuestas", "Auditable vía Microsoft Purview", "Procesado en tenant corporativo"],
+              head: "Cubre EDP",
+              items: [
+                "Tus prompts y las respuestas de Copilot.",
+                "Su registro para auditoría, eDiscovery y políticas de retención de tu empresa.",
+                "El compromiso de que no se usan para entrenar los modelos.",
+              ],
             }},
-            { t: "callout", kind: "tip", head: "Regla simple", x: "Si ves el escudo verde y NO activaste Buscar, tu conversación está dentro del perímetro EDP." },
+            { t: "callout", kind: "tip", head: "Regla simple", x: "El escudo verde indica que tu conversación está bajo EDP. Copilot Chat (Basic) se apoya sobre todo en la web y puede enviar consultas a Bing por su cuenta, sin que actives nada; esas consultas quedan fuera de EDP. Por eso la anonimización se aplica siempre." },
+            { t: "src", x: "Fuente: Microsoft Learn, [«Enterprise data protection in Microsoft 365 Copilot and Microsoft 365 Copilot Chat»](https://learn.microsoft.com/en-us/copilot/privacy-and-protections), actualizado el 3-nov-2026." },
           ],
         },
         {
@@ -233,11 +247,13 @@ window.COURSE_DATA = {
           title: "Ley 21.719 en la práctica",
           body: [
             { t: "bignums", items: [
-              { n: "12/26", l: "Entrada en vigencia", c: "burgundy" },
-              { n: "20.000", l: "UTM de sanción máxima", c: "marine" },
-              { n: "GDPR", l: "Estándar de referencia", c: "olive" },
+              { n: "2027", l: "Vigencia prevista tras la postergación (15 de octubre)", c: "burgundy" },
+              { n: "20.000", l: "UTM de multa máxima (más en caso de reincidencia)", c: "marine" },
+              { n: "GDPR", l: "Estándar europeo de referencia", c: "olive" },
             ]},
-            { t: "p", x: "La **empresa es responsable** del tratamiento de datos personales. Pegar información identificable de un cliente en cualquier herramienta — incluida Copilot — sin anonimizar, compromete a la organización." },
+            { t: "p", x: "La Ley 21.719 se publicó el 13 de diciembre de 2024 y debía entrar en vigencia el 1 de diciembre de 2026. El 17 de noviembre de 2026 el Congreso despachó un proyecto que la posterga al **15 de octubre de 2027**; al cierre de esta revisión (20-nov-2026) faltaba su publicación en el Diario Oficial. Confirma la fecha vigente antes de citarla." },
+            { t: "src", x: "Fuentes: Aninat Abogados, [«Congreso aprueba postergar la entrada en vigencia de la Ley N°21.719...»](https://aninat.cl/noticias-insights/alerta-legal-congreso-aprueba-postergar-la-entrada-en-vigencia-de-la-ley-n21-719-de-datos-personales-hasta-el-15-de-octubre-de-2027/), 17-nov-2026; Usercentrics, [«Ley de protección de datos en Chile»](https://usercentrics.com/es/knowledge-hub/ley-proteccion-datos-chile/), consultado el 20-nov-2026 (fecha de publicación y multas)." },
+            { t: "p", x: "La **empresa es responsable** del tratamiento de los datos personales. Pegar información identificable de un cliente sin anonimizar en cualquier herramienta, Copilot incluido, compromete a la organización. La postergación da más plazo, pero el buen hábito conviene desde hoy." },
             { t: "callout", kind: "alert", head: "Implicancia directa", x: "El escudo verde protege el canal, no te exime del deber de anonimizar. Son capas distintas: una es técnica, la otra es legal." },
           ],
         },
@@ -284,18 +300,18 @@ window.COURSE_DATA = {
         title: "Quiz Bloque 1 · Fundamentos de seguridad",
         questions: [
           {
-            stem: "El escudo verde en Copilot Chat Básico garantiza que:",
+            stem: "El escudo verde en Copilot Chat Básico indica que:",
             options: [
               "Microsoft no puede leer nunca lo que escribes en el chat.",
-              "Tus prompts no entrenan modelos públicos y se procesan en el tenant corporativo.",
+              "Tus prompts y respuestas no se usan para entrenar los modelos y quedan bajo las protecciones contractuales de tu empresa.",
               "Puedes pegar datos personales de clientes sin riesgo legal.",
-              "Las búsquedas en Bing también quedan dentro del perímetro corporativo.",
+              "Las consultas que Copilot envía a Bing también quedan dentro de esa protección.",
             ],
             correct: 1,
-            explain: "EDP garantiza que tus datos no entrenan modelos y se procesan bajo control del tenant. No te exime de la ley, y no cubre búsquedas web de Bing.",
+            explain: "Con EDP, Microsoft trata tus prompts y respuestas como encargado, bajo el DPA, y no los usa para entrenar. No te exime de la ley y no cubre las consultas web enviadas a Bing.",
           },
           {
-            stem: "La Ley 21.719 entra en vigencia en Chile en diciembre de 2026. Respecto de Copilot:",
+            stem: "La Ley 21.719 de protección de datos personales ya fue publicada, aunque su vigencia se está postergando. Respecto de Copilot:",
             options: [
               "Mientras uses el escudo verde no necesitas anonimizar.",
               "Solo aplica a empresas con más de 200 empleados.",
@@ -320,7 +336,7 @@ window.COURSE_DATA = {
       },
       paraLlevar: [
         "Escudo verde = canal. Anonimizar = ley.",
-        "Copilot Básico vive en m365.cloud.microsoft/chat.",
+        "Copilot Chat Básico vive en copilot.cloud.microsoft.",
         "Placeholders estándar: úsalos siempre.",
       ],
       cliffhanger: "En el próximo bloque: por qué Copilot inventa cifras con total confianza, y cómo el framework CORE te protege de eso.",
@@ -345,12 +361,13 @@ window.COURSE_DATA = {
           eyebrow: "Evidencia",
           title: "La Frontera Irregular",
           body: [
-            { t: "p", x: "**Dell'Acqua et al. (2023, Harvard Business School)** estudiaron 758 consultores de BCG usando IA generativa. El hallazgo fue contraintuitivo." },
+            { t: "p", x: "**Dell'Acqua et al. (2023, Harvard Business School)** hicieron un experimento con 758 consultores de BCG que usaron GPT-4. En tareas que la IA hace bien (dentro de la «frontera»), los consultores con IA completaron 12,2 % más tareas, 25,1 % más rápido y con más de 40 % más calidad. En una tarea que parecía igual de fácil, pero quedaba fuera de esa frontera, fueron 19 puntos porcentuales menos propensos a dar con la respuesta correcta." },
             { t: "bignums", items: [
-              { n: "+40%", l: "Productividad dentro de la frontera", c: "olive" },
-              { n: "+25%", l: "Calidad dentro de la frontera", c: "marine" },
-              { n: "−23%", l: "Rendimiento fuera de la frontera", c: "burgundy" },
+              { n: "+40%", l: "Calidad dentro de la frontera", c: "olive" },
+              { n: "25%", l: "Más rápido dentro de la frontera", c: "marine" },
+              { n: "−19 pp", l: "Respuestas correctas fuera de la frontera", c: "burgundy", fs: 72 },
             ]},
+            { t: "src", x: "Fuentes: Dell'Acqua et al., [«Navigating the Jagged Technological Frontier»](https://mitsloan.mit.edu/sites/default/files/2023-10/SSRN-id4573321.pdf), HBS Working Paper 24-013, septiembre de 2023; HBS Working Knowledge, [«Humans vs. Machines»](https://www.library.hbs.edu/working-knowledge/humans-vs-machines-untangling-the-tasks-ai-can-and-cant-handle), 22-nov-2023. Las listas de abajo son ejemplos aplicados al reporte mensual, no tareas del estudio." },
             { t: "compare", bad: {
               head: "Fuera de la frontera",
               items: [
@@ -426,7 +443,7 @@ window.COURSE_DATA = {
           eyebrow: "Técnica complementaria",
           title: "Role prompting sobre CORE",
           body: [
-            { t: "p", x: "Antes del Contexto, añades un **rol experto**. Funciona porque el modelo ajusta su estilo de razonamiento al rol." },
+            { t: "p", x: "Antes del Contexto, añades un **rol experto**. Su aporte principal está en el tono, el vocabulario y el nivel de detalle de la respuesta; no esperes que por sí solo haga más exactas las cifras." },
             { t: "prompt-core", title: "Role + CORE",
               lines: [
                 { tag: "Rol", x: "Eres un analista senior de control de gestión con 15 años de experiencia en empresas chilenas medianas. Tu escritura es seca y directiva, al estilo de un informe a directorio." },
@@ -476,12 +493,12 @@ window.COURSE_DATA = {
             stem: "La Frontera Irregular de Dell'Acqua et al. (2023) muestra que:",
             options: [
               "La IA siempre aumenta la productividad en un 40%.",
-              "Dentro de la frontera sube calidad y productividad; fuera, baja el rendimiento un 23%.",
-              "Los consultores con IA superan siempre a los sin IA.",
+              "Dentro de la frontera suben calidad y rapidez; fuera de ella, baja la probabilidad de acertar (19 puntos porcentuales).",
+              "Los consultores con IA superan siempre a los que trabajan sin IA.",
               "La IA solo funciona para tareas creativas.",
             ],
             correct: 1,
-            explain: "El hallazgo clave es que usar IA fuera de su dominio resta, no suma. Saber dónde estás parado es más importante que saber prompts.",
+            explain: "Usar IA fuera de lo que hace bien resta en vez de sumar, y la frontera no siempre se ve a simple vista. Saber dónde estás parado importa más que dominar trucos de prompts.",
           },
           {
             stem: "¿Cuándo agregar role prompting encima de CORE?",
@@ -498,7 +515,7 @@ window.COURSE_DATA = {
       },
       paraLlevar: [
         "CORE = Contexto, Objetivo, Restricciones, Expectativas.",
-        "Dentro de la frontera: +40%. Fuera: −23%.",
+        "Dentro de la frontera: +40 % de calidad. Fuera: −19 puntos de acierto.",
         "Role prompting solo cuando el tono sea el reto.",
       ],
       cliffhanger: "Con CORE ya no alucinas el input. En el próximo bloque, cómo evitar que Copilot alucine el output — incluso en tareas con números.",
@@ -544,10 +561,12 @@ window.COURSE_DATA = {
           title: "Piensa paso a paso",
           body: [
             { t: "bignums", items: [
-              { n: "58%", l: "Precisión sin CoT", c: "burgundy" },
-              { n: "93%", l: "Precisión con CoT", c: "olive" },
+              { n: "10%", l: "Aciertos sin la instrucción (GSM8K, 2022)", c: "burgundy" },
+              { n: "41%", l: "Aciertos con «pensemos paso a paso»", c: "olive" },
             ]},
-            { t: "p", x: "**Wei et al. (2022)** mostraron que añadir 'piensa paso a paso' sube drásticamente la precisión en razonamiento lógico. En el reporte mensual, úsalo para cálculos compuestos: variaciones %, ratios, descomposiciones." },
+            { t: "p", x: "**Wei et al. (2022)** mostraron que pedir al modelo que razone por pasos, con ejemplos resueltos, mejora sus resultados en problemas de varios pasos. **Kojima et al. (2022)** probaron la versión más simple, agregar «pensemos paso a paso»: en problemas de matemática escolar (GSM8K), un modelo de ese año pasó de 10,4 % a 40,7 % de aciertos." },
+            { t: "p", x: "Hoy el efecto es menor. Los modelos de razonamiento, como el modo «Pensar más profundo», ya trabajan por pasos sin que se lo pidas, y un estudio de Wharton de 2025 encontró que en ellos la instrucción agrega poco o nada de exactitud y alarga las respuestas. Sigue siendo útil para que el modelo **muestre** los pasos y puedas revisar cada cálculo: variaciones porcentuales, razones y descomposiciones." },
+            { t: "src", x: "Fuentes: Kojima et al., [«Large Language Models are Zero-Shot Reasoners»](https://arxiv.org/abs/2205.11916), NeurIPS 2022 (InstructGPT text-davinci-002); Meincke, Mollick et al., [«The Decreasing Value of Chain of Thought in Prompting»](https://arxiv.org/abs/2506.07142v1), Wharton Generative AI Labs, 8-jun-2025." },
             { t: "prompt-core", title: "CoT aplicado a variación de ventas",
               lines: [
                 { tag: "C", x: "Tengo ventas [MONTO_OCT] y [MONTO_SEP]. Mix por línea abajo." },
@@ -565,7 +584,7 @@ window.COURSE_DATA = {
           eyebrow: "Técnica · Self-critique",
           title: "El modelo como su propio auditor",
           body: [
-            { t: "p", x: "Flujo de tres pasos. Baja fuerte las alucinaciones porque obliga al modelo a explicitar supuestos." },
+            { t: "p", x: "Flujo de tres pasos. Ayuda a encontrar supuestos débiles y cifras dudosas porque obliga al modelo a explicitarlos. No reemplaza tu verificación: el mismo modelo que se equivocó puede pasar por alto su error." },
             { t: "grid3", items: [
               { title: "1 · Generar", body: "Prompt CORE normal. Recibes la primera respuesta." },
               { title: "2 · Criticar", body: "'¿Qué supuestos hiciste? ¿Qué cifra podría ser inventada? ¿Dónde hay riesgo de error?'" },
@@ -581,13 +600,13 @@ window.COURSE_DATA = {
           eyebrow: "UI del chat",
           title: "Selector de modos",
           body: [
-            { t: "grid4", items: [
-              { title: "Automático", body: "Default diario. 90% de los casos." },
-              { title: "Respuesta rápida", body: "Tareas simples. Resúmenes, reformulaciones." },
-              { title: "Pensar más profundo", body: "Razonamiento extendido. CoT complejo, números, análisis." },
-              { title: "Buscar", body: "Fuerza búsqueda web con citas. Fuera de EDP." },
+            { t: "grid3", items: [
+              { title: "Automático", body: "La opción por defecto: Copilot decide qué modelo usar según la pregunta." },
+              { title: "Respuesta rápida", body: "Para preguntas simples o de rutina: resúmenes cortos, reformulaciones." },
+              { title: "Pensar más profundo", body: "Para preguntas complejas o abiertas: cálculos compuestos, análisis con varios pasos." },
             ]},
-            { t: "callout", kind: "tip", head: "Regla de bolsillo", x: "90% Automático. Pensar más profundo cuando lo anterior salió pobre. Buscar para información que cambia rápido." },
+            { t: "callout", kind: "tip", head: "Regla de bolsillo", x: "Parte en Automático. Si la respuesta sale pobre o el problema tiene varios pasos, cambia a Pensar más profundo. Recuerda que Copilot Chat (Basic) puede buscar en la web por su cuenta; si la información cambia rápido, pide las fuentes y revísalas." },
+            { t: "src", x: "Fuente: Microsoft Learn, [«Features in Copilot»](https://learn.microsoft.com/en-us/copilot/features), actualizado el 17-nov-2026. Microsoft advierte que estas opciones cambian a medida que llegan modelos nuevos." },
           ],
         },
         {
@@ -597,15 +616,13 @@ window.COURSE_DATA = {
           eyebrow: "UI del chat",
           title: "Subir archivos",
           body: [
-            { t: "bignums", items: [
-              { n: "512 MB", l: "Tamaño máx. por archivo", c: "marine" },
-              { n: "3–10", l: "Archivos por día (aprox.)", c: "burgundy" },
-            ]},
+            { t: "p", x: "Puedes adjuntar archivos junto con tu prompt. Microsoft no publica límites numéricos fijos para Copilot Chat (Basic): aplica límites de uso razonable que varían y avisa dentro del producto cuando una función deja de estar disponible por haber llegado al tope." },
+            { t: "src", x: "Fuente: Microsoft Support, [«Limits for features in Copilot Chat»](https://support.microsoft.com/microsoft-365-copilot/limits-for-features-copilot-chat), actualizado el 18-nov-2026." },
             { t: "compare", bad: {
-              head: "Lee mal",
+              head: "Suele leer mal",
               items: ["PDFs escaneados sin OCR", "Tablas con celdas fusionadas", "Hojas con macros pesadas", "Imágenes dentro del PDF"],
             }, good: {
-              head: "Lee bien",
+              head: "Suele leer bien",
               items: ["XLSX con tabla plana", "CSV anonimizado", "DOCX con encabezados claros", "Archivos Markdown (MD)"],
             }},
             { t: "callout", kind: "alert", head: "Antes de subir", x: "Anonimiza el archivo primero. Placeholders como [CLIENTE_001] en la columna de clientes, [MONTO] en la de cifras sensibles si corresponde." },
@@ -625,7 +642,7 @@ window.COURSE_DATA = {
               head: "NO usar",
               items: ["Renders técnicos o planos", "Documentos oficiales", "Cualquier cosa con precisión métrica", "Gráficos con cifras reales (usa Excel/PBI)"],
             }},
-            { t: "callout", kind: "nota", head: "Cupo aproximado", x: "Entre 1 y 15 imágenes por día según cuenta. Verifica en la documentación oficial de Microsoft para tu tenant." },
+            { t: "callout", kind: "nota", head: "Cupo de imágenes", x: "La generación de imágenes está sujeta a límites de uso razonable. Microsoft no publica un número fijo por día; Copilot te avisa cuando llegas al tope." },
           ],
         },
         {
@@ -639,21 +656,21 @@ window.COURSE_DATA = {
             { t: "matcher", items: [
               {
                 task: "Clasificar 40 tickets del mes en 4 categorías para el reporte.",
-                options: ["Few-shot + Automático", "Chain-of-thought + Pensar más profundo", "Self-critique + Buscar"],
+                options: ["Few-shot + Automático", "Chain-of-thought + Pensar más profundo", "Self-critique (generar, criticar, mejorar)"],
                 correct: 0,
-                explain: "Patrón repetitivo con 3 ejemplos basta. Tarea simple, modo automático.",
+                explain: "Patrón repetitivo: con tres ejemplos basta. Tarea simple, modo Automático.",
               },
               {
                 task: "Calcular la variación de margen y descomponerla por línea de negocio.",
-                options: ["Few-shot + Automático", "Chain-of-thought + Pensar más profundo", "Self-critique + Buscar"],
+                options: ["Few-shot + Automático", "Chain-of-thought + Pensar más profundo", "Self-critique (generar, criticar, mejorar)"],
                 correct: 1,
-                explain: "Cálculo compuesto con razonamiento numérico. CoT + modo profundo reduce error aritmético.",
+                explain: "Cálculo compuesto con varios pasos. Pedir los pasos y usar el modo profundo te deja revisar cada operación.",
               },
               {
                 task: "Redactar la carta de introducción del reporte que verá el directorio.",
-                options: ["Few-shot + Automático", "Chain-of-thought + Pensar más profundo", "Self-critique + Buscar"],
+                options: ["Few-shot + Automático", "Chain-of-thought + Pensar más profundo", "Self-critique (generar, criticar, mejorar)"],
                 correct: 2,
-                explain: "Alto stake, salida a directorio. Self-critique para cazar supuestos débiles antes de enviar.",
+                explain: "Mucho en juego y destino directorio. La autocrítica ayuda a detectar supuestos débiles antes de enviar; la revisión final es tuya.",
               },
             ]},
           ],
@@ -698,8 +715,8 @@ window.COURSE_DATA = {
         ],
       },
       paraLlevar: [
-        "Few-shot para patrón, CoT para cálculo, Self-critique para alto stake.",
-        "90% Automático. Profundo cuando Automático falle.",
+        "Few-shot para patrones, paso a paso para cálculos, autocrítica cuando hay mucho en juego.",
+        "Parte en Automático; usa Pensar más profundo cuando la respuesta salga pobre.",
         "Subir archivos: anonimiza antes, lee tablas planas.",
       ],
       cliffhanger: "Sabes redactar prompts perfectos. ¿Qué pasa cuando el lunes necesitas el mismo contexto que cargaste hoy? Siguiente: memoria, colaboración y agentes.",
@@ -722,20 +739,22 @@ window.COURSE_DATA = {
           code: "L4.1",
           dur: "7 min",
           eyebrow: "Colaboración",
-          title: "Biblioteca y Páginas",
+          title: "Páginas y Biblioteca",
           body: [
-            { t: "p", x: "**Páginas** es un lienzo colaborativo multiusuario. El flujo canónico: prompt en chat → botón 'Editar en Páginas' → chat a la izquierda, Página a la derecha → compartir link con el equipo." },
-            { t: "schema", label: "Layout de Páginas", parts: [
+            { t: "p", x: "**Páginas** es un lienzo editable y colaborativo que nace desde el chat. Bajo una respuesta de Copilot, abre el menú de tres puntos y elige **Editar en Páginas**; puedes enviar la respuesta a una página nueva o a una existente. Luego compartes la página con tu equipo, la editan juntos y pueden seguir pidiéndole cambios a Copilot dentro de ella." },
+            { t: "p", x: "Las páginas que has creado quedan en la **Biblioteca** de Copilot hasta que las borres. Están disponibles sin licencia de Copilot para cuentas del trabajo que tengan almacenamiento en SharePoint u OneDrive." },
+            { t: "schema", label: "Esquema ilustrativo (la interfaz puede variar)", parts: [
               { kind: "topbar" },
               { kind: "row", items: [
-                { box: "Chat (izquierda)", width: 1 },
-                { box: "Página editable (derecha)", highlight: true, width: 2 },
+                { box: "Respuesta de Copilot | ⋯ → Editar en Páginas", width: 1 },
+                { box: "Página editable y compartible", highlight: true, width: 2 },
               ]},
               { kind: "row", items: [
-                { box: "Compartir link · coautoría" },
+                { box: "Biblioteca | páginas anteriores" },
               ]},
             ]},
-            { t: "callout", kind: "tip", head: "Ejemplos útiles para reportes", x: "Plantilla reutilizable del reporte mensual · Minuta del comité con acciones · Checklist de cierre contable compartido." },
+            { t: "src", x: "Fuente: Microsoft Support, [«Get started with Microsoft Copilot Pages»](https://support.microsoft.com/en-us/microsoft-365-copilot/get-started-with-microsoft-365-copilot-pages), consultado el 20-nov-2026." },
+            { t: "callout", kind: "tip", head: "Ejemplos útiles para reportes", x: "Plantilla reutilizable del reporte mensual | minuta del comité con acciones | lista de verificación del cierre contable compartida." },
           ],
         },
         {
@@ -743,15 +762,16 @@ window.COURSE_DATA = {
           code: "L4.2",
           dur: "5 min",
           eyebrow: "Memoria",
-          title: "Personalización · 'Enseñar'",
+          title: "Personalización | instrucciones personalizadas y memoria",
           body: [
-            { t: "p", x: "Dejas cargado tu perfil profesional una vez. Copilot no te vuelve a preguntar quién eres, qué haces, qué tono usas." },
+            { t: "p", x: "En la configuración del chat, sección **Personalización**, puedes escribir **instrucciones personalizadas**: quién eres, qué haces y cómo quieres que te responda. Copilot las aplica en cada conversación y no tienes que repetirlas. Copilot también tiene una **memoria** (en vista previa) que guarda datos de tus conversaciones; tu organización puede tenerla desactivada." },
+            { t: "src", x: "Fuentes: Microsoft Support, [«Customize how Microsoft 365 Copilot responds to you»](https://support.microsoft.com/en-us/microsoft-365-copilot/customize-how-microsoft-365-copilot-responds-to-you); Microsoft Learn, [«Copilot personalization and memory»](https://learn.microsoft.com/copilot/microsoft-365/copilot-personalization-memory), actualizado el 3-nov-2026. Los nombres de los menús pueden variar según idioma y versión." },
             { t: "compare", good: {
               head: "Sí poner",
-              items: ["Cargo y área funcional", "Tipo de empresa e industria", "Tono preferido (formal chileno, memo directorio)", "Idiomas de trabajo"],
+              items: ["Cargo y área funcional", "Tipo de empresa e industria", "Tono preferido (formal chileno, memo de directorio)", "Idiomas de trabajo"],
             }, bad: {
-              head: "NO poner nunca",
-              items: ["Datos sensibles de terceros", "Precios o márgenes confidenciales", "Comisiones internas", "Proyectos bajo NDA"],
+              head: "Nunca poner",
+              items: ["Datos sensibles de terceros", "Precios o márgenes confidenciales", "Comisiones internas", "Proyectos bajo acuerdo de confidencialidad"],
             }},
           ],
         },
@@ -759,14 +779,15 @@ window.COURSE_DATA = {
           id: "L4.3",
           code: "L4.3",
           dur: "5 min",
-          eyebrow: "Feature sorpresa",
-          title: "Agent Builder · gratis",
+          eyebrow: "Agentes",
+          title: "Agent Builder | incluido en Copilot Chat",
           body: [
-            { t: "p", x: "**Sí, Agent Builder funciona en Copilot Chat Básico.** Los límites son razonables para empezar." },
+            { t: "p", x: "Copilot Chat (Basic) incluye **agentes basados en instrucciones y sitios web públicos**, que puedes crear desde el mismo chat con **Agent Builder**, sin costo adicional." },
             { t: "grid2", items: [
-              { title: "Sí puede", body: "Instrucciones fijas · hasta 4 URLs públicas de conocimiento · prompts de inicio · imagen · intérprete de código básico." },
-              { title: "No puede", body: "Leer SharePoint · leer tu correo · acceder a datos del tenant · usar fuentes privadas." },
+              { title: "Incluido", body: "Nombre (hasta 30 caracteres), descripción (hasta 1.000), instrucciones (hasta 8.000), **hasta 4 URL públicas** como conocimiento y prompts de inicio. La documentación lista además un intérprete de código y un generador de imágenes." },
+              { title: "Con costo o fuera de alcance", body: "Los agentes que usan datos compartidos de la empresa (SharePoint, conectores de Graph) se cobran por consumo y vienen **desactivados por defecto**. Agent Builder no permite crear acciones que se conecten con servicios externos." },
             ]},
+            { t: "src", x: "Fuentes: Microsoft Learn, [«Agents in Copilot Chat»](https://learn.microsoft.com/en-us/copilot/agents), actualizado el 10-nov-2026; [«Build agents with Agent Builder»](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/agent-builder-build-agents) y [«Add knowledge sources»](https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agent-builder-add-knowledge), ambas actualizadas el 16-nov-2026." },
           ],
         },
         {
@@ -774,14 +795,14 @@ window.COURSE_DATA = {
           code: "L4.4",
           dur: "8 min",
           eyebrow: "En vivo",
-          title: "Construcción guiada · Asistente de reporte mensual",
+          title: "Construcción guiada | asistente de reporte mensual",
           body: [
             { t: "agent-steps", steps: [
-              { n: "1", title: "Nombre e ícono", body: "Asistente de Reporte Mensual · ícono de documento." },
-              { n: "2", title: "Descripción (≤ 1000 car.)", body: "Asistente que ayuda a estructurar, redactar y revisar el reporte ejecutivo mensual siguiendo el framework CORE. Anonimiza antes de pegar datos. Responde en español chileno formal." },
-              { n: "3", title: "Instrucciones CORE (≤ 8000 car.)", body: "Rol: analista senior de control de gestión. Objetivo: producir borradores de secciones del reporte (hallazgos, explicación de varianzas, recomendaciones). Restricciones: no inventar cifras; pedir al usuario la fuente; usar placeholders cuando detecte datos sensibles. Expectativas: formato de comité, máximo 120 palabras por sección, tono seco." },
-              { n: "4", title: "URLs de conocimiento (hasta 4)", body: "Sitio corporativo · glosario público de KPIs · normativa SII pública · calendario tributario. Solo fuentes públicas." },
-              { n: "5", title: "Prompts de inicio (hasta 10)", body: "'Ayúdame a armar la sección de hallazgos' · 'Revisa este borrador con self-critique' · 'Clasifica estos pendientes por área' · 'Genera preguntas para el comité' ..." },
+              { n: "1", title: "Nombre (hasta 30 caracteres)", body: "Asistente de reporte mensual." },
+              { n: "2", title: "Descripción (hasta 1.000 caracteres)", body: "Asistente que ayuda a estructurar, redactar y revisar el reporte ejecutivo mensual siguiendo el marco CORE. Pide anonimizar antes de pegar datos. Responde en español de Chile, en registro formal." },
+              { n: "3", title: "Instrucciones CORE (hasta 8.000 caracteres)", body: "Rol: analista senior de control de gestión. Objetivo: producir borradores de secciones del reporte (hallazgos, explicación de variaciones, recomendaciones). Restricciones: no inventar cifras; pedir al usuario la fuente; usar marcadores cuando detecte datos sensibles. Expectativas: formato de comité, máximo 120 palabras por sección, tono seco." },
+              { n: "4", title: "URL de conocimiento (hasta 4)", body: "Sitio corporativo | glosario público de indicadores | normativa pública del SII | calendario tributario. Solo fuentes públicas. Cada URL puede tener como máximo dos niveles de ruta y no puede llevar parámetros (nada después de «?»)." },
+              { n: "5", title: "Prompts de inicio", body: "«Ayúdame a armar la sección de hallazgos» | «Revisa este borrador con autocrítica» | «Clasifica estos pendientes por área» | «Genera preguntas para el comité»." },
             ]},
           ],
         },
@@ -798,10 +819,10 @@ window.COURSE_DATA = {
               "Consultar directamente la base de datos del ERP.",
             ],
             correct: 2,
-            explain: "Agent Builder en la versión gratuita NO accede al tenant. Solo URLs públicas, instrucciones e intérprete básico.",
+            explain: "Sin costo adicional, el agente se apoya en instrucciones y hasta 4 sitios públicos. Usar SharePoint u otros datos de la empresa se cobra por consumo y viene desactivado por defecto.",
           },
           {
-            stem: "En Personalización ('Enseñar') de Copilot, ¿qué NO debes cargar?",
+            stem: "En las instrucciones personalizadas de Copilot, ¿qué no debes cargar?",
             options: [
               "Tu cargo y área funcional.",
               "El tono formal chileno que prefieres.",
@@ -809,7 +830,7 @@ window.COURSE_DATA = {
               "Los idiomas en los que trabajas.",
             ],
             correct: 2,
-            explain: "Personalización queda persistida en tu perfil. No cargues datos comerciales sensibles; cárgate a ti, no a tu empresa.",
+            explain: "Las instrucciones quedan guardadas y se aplican a todas tus conversaciones. Describe tu rol y tus preferencias, no los datos comerciales de tu empresa.",
           },
           {
             stem: "Páginas (en Copilot) sirve principalmente para:",
@@ -820,13 +841,13 @@ window.COURSE_DATA = {
               "Ejecutar agentes automáticamente.",
             ],
             correct: 1,
-            explain: "Páginas es el lienzo colaborativo: chat a la izquierda, documento a la derecha, compartible por link.",
+            explain: "Páginas convierte una respuesta del chat en un documento editable que puedes compartir y trabajar con tu equipo. Las páginas creadas quedan en la Biblioteca.",
           },
         ],
       },
       paraLlevar: [
-        "Páginas = lienzo colaborativo; Personalización = tu perfil.",
-        "Agent Builder gratis: 4 URLs públicas, sin datos del tenant.",
+        "Páginas es el lienzo colaborativo; las instrucciones personalizadas guardan tu perfil.",
+        "Agent Builder incluido: hasta 4 URL públicas; los datos de la empresa se cobran por consumo.",
         "Construye tu primer agente con CORE en las instrucciones.",
       ],
       cliffhanger: "",

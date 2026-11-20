@@ -3,12 +3,19 @@
 
 const { useState, useMemo, useCallback } = React;
 
-// Inline markdown: **bold** and *italic*. Returns HTML string for dangerouslySetInnerHTML.
+// Markdown mínimo: **negrita**, *cursiva* y [texto](https://url).
+// Devuelve HTML para dangerouslySetInnerHTML. El contenido viene solo de content.js.
 function md(s) {
   if (s == null) return "";
   return String(s)
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     .replace(/(^|[^\*])\*([^\*\n]+?)\*(?!\*)/g, "$1<em>$2</em>");
+}
+
+// Fuente verificable con fecha, en letra pequeña bajo una cifra o un hecho.
+function Source({ x }) {
+  return <p className="src" dangerouslySetInnerHTML={{ __html: md(x) }} />;
 }
 
 // ---------- Primitives ----------
@@ -200,7 +207,7 @@ function Schema({ label, parts }) {
                 <span className="schema-dot" />
                 <span className="schema-dot" />
                 <span style={{ flex: 1 }} />
-                <span style={{ fontFamily: "monospace", fontSize: 11, color: "var(--ink-3)" }}>m365.cloud.microsoft/chat</span>
+                <span style={{ fontFamily: "monospace", fontSize: 11, color: "var(--ink-3)" }}>copilot.cloud.microsoft</span>
               </div>
             );
           }
@@ -486,6 +493,8 @@ function renderPart(part, key) {
   switch (part.t) {
     case "p":
       return <p key={key} dangerouslySetInnerHTML={{ __html: md(part.x) }} />;
+    case "src":
+      return <Source key={key} x={part.x} />;
     case "callout":
       return <Callout key={key} kind={part.kind} head={part.head}>{part.x}</Callout>;
     case "bignums":
@@ -528,7 +537,7 @@ function renderPart(part, key) {
 }
 
 Object.assign(window, {
-  CoreChipRow, CopyButton, PromptCore, PromptRaw, Callout, BigNumbers,
+  md, Source, CoreChipRow, CopyButton, PromptCore, PromptRaw, Callout, BigNumbers,
   Compare, Grid2, Grid3, Grid4, Schema, TrapReveal, AforismoMini,
   ExerciseTextarea, Matcher, AgentSteps, Timeline, LlmSim, renderPart,
 });
